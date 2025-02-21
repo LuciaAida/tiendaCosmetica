@@ -5,11 +5,13 @@
     box-sizing: border-box;
     
 }
+
 .titulo{
     font-weight: bold;
     color: #5f5e5e;
     font-size: 60px;
 }
+
 body{
     display: flex;
     height: 200px;

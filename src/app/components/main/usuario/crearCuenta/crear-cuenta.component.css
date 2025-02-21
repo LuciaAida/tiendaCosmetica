@@ -44,6 +44,13 @@ body {
   background-color: #EFEFEF; /* Fondo claro para los campos */
 }
 
+.condiciones{
+  gap: 4px; 
+  white-space: nowrap;
+  display: flex;
+  margin: auto;
+}
+
 .enviar {
     display: block;
     margin: 0 auto; /* Centra el botón horizontalmente */
