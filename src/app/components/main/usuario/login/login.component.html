@@ -1,0 +1,17 @@
+<div class="iniciarSesion">
+    <h1 style="font-family:Verdana, Geneva, Tahoma, sans-serif; padding: 20px;">Iniciar sesión</h1>
+    <form [formGroup]="form" (ngSubmit)="enviar()"> 
+      
+      <div class="formulario-usuario">
+        <label for="usuarioCorreo">Correo:</label>
+        <input id="usuarioCorreo" #usuarioCorreo placeholder="Correo" type="email" formControlName="correo"/>
+  
+        <label for="usuarioContrasenia">Contraseña:</label>
+        <input id="usuarioContrasenia" #usuarioContrasenia placeholder="Contraseña" type="password" formControlName="contrasenia"/>
+    
+        <button class="enviar" type="submit">Iniciar sesión</button> 
+      </div> <!-- Este es el cierre de "formulario-usuario" -->
+    </form>
+  </div> <!-- Este es el cierre de "crearCuenta" -->
+  
+  

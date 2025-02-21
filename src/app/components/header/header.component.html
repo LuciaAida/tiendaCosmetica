@@ -36,7 +36,17 @@
                     </ul>                         
                 </li>
             </ul>
-            <img src="https://cdn-icons-png.flaticon.com/512/3276/3276535.png" alt="Icono de la cuenta">
+            <ul class="lista-secundaria"></ul>
+            <li class="cuenta">
+                <img src="https://cdn-icons-png.flaticon.com/512/3276/3276535.png" alt="Icono de la cuenta">
+                <ul class="propiedades-cuenta">
+                    <li >Información personal</li>
+                    <li >Mi cesta</li>
+                    <li (click)="navigateTo('/login')">Iniciar Sesión</li>
+                    <li (click)="navigateTo('/crearCuenta')">Crear cuenta</li>
+                    <li >Cerrar sesión</li>
+                </ul>
+            </li>
         </div>
     </nav>
 </header>
