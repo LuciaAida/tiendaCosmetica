@@ -1,0 +1,20 @@
+<div class="cesta">
+    <h1 style="font-family:Verdana, Geneva, Tahoma, sans-serif; padding: 20px;">Mi cesta</h1>
+    <form [formGroup]="form" (ngSubmit)="enviar()"> 
+      
+      <div class="formulario-producto">
+        <label for="productoNombre">Nombre del producto</label>
+        <input id="productoNombre" #productoNombre placeholder="Nombre" type="text" formControlName="correo"/>
+  
+        <p>AAAA</p>
+    <!-- Tarjetas horizontales de productos y al lado que puedas sumar cantidad?? o borrar el producto 
+        Que se vea el nombre del producto, una foto y precio
+        Además, botón de eliminar y para sumar cantidad
+        Al final, hacer compra o seguir comprando (volver a atrás)-->
+        <button class="enviar" type="submit">Realizar compra</button> 
+        <button class="enviar" (click)="navigateTo('/lista')" type="submit">Seguir comprando</button> 
+      </div> 
+    </form>
+  </div> 
+  
+  
