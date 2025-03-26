@@ -1,0 +1,121 @@
+/* los elementos ocupen lo que necesitan no más */
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.titulo{
+    font-weight: bold;
+    color: #5f5e5e;
+    font-size: 60px;
+}
+
+body{
+    display: flex;
+    height: 200px;
+    color: white; /*las letras*/
+    position: fixed;
+}
+
+.navbar{
+    width: 100%;
+    display: flex;
+    background-color: #EFEFEF;
+    justify-content: space-around; /*espacio entre logo y barra de navegacion*/
+    align-items: center;
+}
+.navbar a:hover{
+    background-color: #caebf2;
+}
+
+img {
+    display: block;
+    width: 40px;
+    height: 40px;
+}
+
+.lista-principal, .lista-secundaria{
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+li{
+    list-style: none;
+    cursor: pointer;
+    padding: 30px;
+    transition: .3s ease;
+}
+li:hover{
+    background-color: #caebf2;
+}
+
+/*--------------------------PIEL / CUENTA-------------------------*/
+.piel, .cuenta{
+    position: relative;
+}
+.tipos-piel, .propiedades-cuenta{
+    display: none; /*submenu oculto*/
+    position: absolute;
+    list-style: none;
+    padding: 10px 0;
+    margin-top: 5%;
+}
+.tipos-piel li, .propiedades-cuenta li{ 
+    width: 190px;
+    transform: translateX(-20px);
+    border-top: solid 1px #fff;
+    border-bottom: solid 1px #fff;
+    text-align: center;
+    background-color: #EFEFEF;
+}
+.tipos-piel li:hover, .propiedades-cuenta li:hover{
+    background-color:#caebf2 ;
+}
+.piel:hover > .tipos-piel, .cuenta:hover > .propiedades-cuenta{
+    display: block; /*para mostrar los tipos*/
+}
+
+/*--------------------------PELO-------------------------*/
+.pelo, .peloRizado{
+    position: relative;
+}
+
+.productos-pelo, .productos-peloRizado{
+    display: none;
+    padding: 10px 0;
+    position: absolute;
+    margin-top: 5%;
+}
+.productos-pelo li, .productos-peloRizado li{ 
+    width: 190px;
+    transform: translateX(-20px);
+    border-top: solid 1px #fff;
+    border-bottom: solid 1px #fff;
+    text-align: center;
+    background-color: #EFEFEF;
+}
+
+.productos-peloRizado li:hover, .productos-pelo li:hover{
+    background-color:#caebf2 ;
+}
+
+.pelo:hover  > .productos-pelo, .peloRizado:hover > .productos-peloRizado{
+    display: block;
+}
+
+/*para pantalla de movil*/
+@media (max-width : 400) {
+    nav{
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+    }nav p{
+        font-size: 20px;
+        font-weight: 20px;
+    }
+    .main-ul{
+        flex-direction: column;
+    }
+}

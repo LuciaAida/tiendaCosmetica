@@ -1,0 +1,55 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+
+.infoPers {
+    max-width: 650px;
+    margin: 90px auto;
+    padding: 20px;
+    background-color: #EFEFEF;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.infoPers2 {
+    width: 600px; /* El formulario ocupa todo el ancho */
+    display: flex;
+    font-size: 18px;
+    list-style:none;
+    flex-direction: column;
+  }
+  
+.infoPers2 label {
+    font-weight: bold;
+    color: #5f5e5e;
+    margin-bottom: 10px; /* Separación entre la etiqueta y el campo */
+}
+
+.enviar {
+    display: block;
+    margin: 0 auto; /* Centra el botón horizontalmente */
+    background-color: #585757;
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 200px;
+}
+
+.enviar:hover {
+    background-color: #808080;
+    transform: scale(1.02);
+}

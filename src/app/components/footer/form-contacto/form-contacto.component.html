@@ -1,0 +1,26 @@
+<div class="formCont">
+    <h1 style="font-family:Verdana, Geneva, Tahoma, sans-serif; padding: 20px;">Formulario de contacto</h1>
+    <form [formGroup]="form" (ngSubmit)="enviar()"> 
+      
+      <div class="formulario-usuario">
+        <label for="usuarioNombre">Nombre:</label>
+        <input id="usuarioNombre" #usuarioNombre placeholder="Nombre" type="text" formControlName="nombre"/>
+
+        <label for="usuarioCorreo">Correo electrónico:</label>
+        <input id="usuarioCorreo" #usuarioCorreo placeholder="Correo" type="email" formControlName="correo"/>
+  
+        <label for="usuarioAsunto">Asunto del correo:</label>
+        <input id="usuarioAsunto" #usuarioAsunto placeholder="Asunto" type="text" formControlName="asunto"/>
+    
+        <label for="usuarioDescripcion">Descripción:</label>
+        <textarea id="usuarioDescripcion" formControlName="descripcion" placeholder="Descripción"></textarea>
+        
+        <div class="enviar">
+          <button class="enviar2" type="submit">Enviar</button>
+          <button class="cancelar" (click)="navigateTo('/lista')">Cancelar</button> 
+        </div>
+      </div> 
+    </form>
+  </div> 
+  
+  

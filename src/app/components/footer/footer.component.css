@@ -1,0 +1,22 @@
+.footer{
+    width: 100%;
+    display: flex;
+    background-color: #EFEFEF;
+    justify-content: space-around; /*espacio entre logo y barra de navegacion*/
+    align-items: center;
+    margin-top: 15px;
+    text-align: center;
+    border-top: 1px solid #ccc;
+}
+.footer a:hover{
+    background-color: #caebf2;
+}
+
+.contacto{
+    color:black;
+    text-decoration: none;
+}
+
+.formulario{
+    cursor: pointer;
+}

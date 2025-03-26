@@ -1,0 +1,52 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="header.component.css">
+<header>
+    <nav>
+        <div class="navbar">
+            <p class="titulo">Beauty Lu</p>
+            <ul class="lista-principal">
+                <li class="piel">
+                    Facial
+                    <ul class="tipos-piel">
+                        <li >Piel grasa</li>
+                        <li >Piel seca</li>
+                        <li >Piel mixta</li>
+                        <li >Piel sensible</li>
+                        <li >Antienvejecimiento</li>
+                    </ul>
+                </li>
+                <li class="pelo">
+                    Cabello
+                    <ul class="productos-pelo">
+                        <li>Champús</li>
+                        <li >Acondicionadores</li>
+                        <li >Mascarillas</li>
+                        <li >Sérums</li>
+                        <li >Aceites</li>
+                    </ul>
+                </li>
+                <li class="peloRizado"> Cabello rizado
+                    <ul class="productos-peloRizado">
+                        <li>Champús</li>                                
+                        <li >Acondicionadores</li>
+                        <li >Mascarillas</li>
+                        <li >Leave in</li>
+                        <li >Fijadores</li>
+                        <li >Protectores térmicos</li>   
+                    </ul>                         
+                </li>
+            </ul>
+            <ul class="lista-secundaria"></ul>
+            <li class="cuenta">
+                <img src="https://cdn-icons-png.flaticon.com/512/3276/3276535.png" alt="Icono de la cuenta">
+                <ul class="propiedades-cuenta">
+                    <li (click)="navigateTo('/infoPers')">Información personal</li>
+                    <li (click) = "navigateTo('/cestaComp')">Mi cesta</li>
+                    <li (click)="navigateTo('/login')">Iniciar Sesión</li>
+                    <li (click)="navigateTo('/crearCuenta')">Crear cuenta</li>
+                    <li >Cerrar sesión</li>
+                </ul>
+            </li>
+        </div>
+    </nav>
+</header>
