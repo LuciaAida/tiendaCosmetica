@@ -14,3 +14,18 @@
   </form>
 </div> 
 
+<div class="modal" *ngIf="mostrarModalError">
+  <div class="modal-contenido">
+    <p>{{modalMensajeError}}</p>
+    <button class="opciones" (click)="cerrarModal()">Aceptar</button>
+  </div>
+</div>
+
+<div class="modal" *ngIf="mostrarModal">
+  <div class="modal-contenido">
+    <p>{{modalMensaje}}</p>
+    <button class="opciones" (click)="navigateTo('/login')">Aceptar</button>
+    <button class="opciones" (click)="cerrarModal()">Cerrar</button>
+  </div>
+</div>
+

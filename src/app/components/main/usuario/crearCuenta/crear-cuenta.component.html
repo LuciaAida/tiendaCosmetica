@@ -17,7 +17,7 @@
       <input id="contrasenia2" #usuarioContrasenia placeholder="Confirmar contraseña"  type="password" formControlName="confContrasenia"/>
       
       <label for="condiciones" class="condiciones"> <!--  white-space el texto aparece en una sola linea -->
-        <input type="checkbox" id="condiciones" name="condiciones">
+        <input type="checkbox" id="condiciones" formControlName="condiciones">
         Acepta los <a href="assets/terminosCond.html">términos y condiciones</a>
       </label>
 
@@ -26,21 +26,18 @@
   </form>
 </div> <!-- Este es el cierre de "crearCuenta" -->
 
-
-  <!-- Obligación de todos los campos completados
-  <div class="modal" *ngIf="mostrarModalError">
-    <div class="modal-contenido">
-      <p>{{ modalMensajeError }}</p>
-      <button class="detalle-añadir" (click)="cerrarModal()">Aceptar</button>
-    </div>
+<div class="modal" *ngIf="mostrarModalError">
+  <div class="modal-contenido">
+    <p>{{modalMensajeError}}</p>
+    <button class="opciones" (click)="cerrarModal()">Aceptar</button>
   </div>
+</div>
 
-   Modal de aceptación
-  <div class="modal" *ngIf="mostrarModal">
-    <div class="modal-contenido">
-      <p>{{ modalMensaje }}</p>
-      <button class="detalle-añadir" (click)="volverAtras()">Aceptar</button>
-      <button class="detalle-añadir" (click)="cerrarModal()">Cerrar</button>
-    </div>
-  </div> -->
+<div class="modal" *ngIf="mostrarModal">
+  <div class="modal-contenido">
+    <p>{{modalMensaje}}</p>
+    <button class="opciones" (click)="navigateTo('/login')">Aceptar</button>
+    <button class="opciones" (click)="cerrarModal()">Cerrar</button>
+  </div>
+</div>
   

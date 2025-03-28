@@ -3,8 +3,7 @@ import { usuarioModelo } from '../modelo/usuario.model';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../../service/aut-service.service';
-import { user } from '@angular/fire/auth';
-import { log } from 'console';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,16 +12,22 @@ import { log } from 'console';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
+
+
 export class LoginComponent {
  public form!: FormGroup;
-
+ mostrarModal: boolean = false;
+ mostrarModalError: boolean = false;
+ modalMensaje: string = '';
+ modalMensajeError: string = '';
  correo: string ="";
  contrasenia: string="";
  user: any = null;
 
   constructor(
     private autenService:AuthService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ){
   }
 
@@ -37,24 +42,43 @@ export class LoginComponent {
 
   login() {
     const {correo, contrasenia } = this.form.value;
-    this.autenService.login(correo,contrasenia).then(() => {
-      console.log('Login exitoso');
-      // Aquí podrías redirigir al usuario o hacer cualquier acción adicional
+    this.autenService.login(correo,contrasenia)
+      .then(() => {
+        this.modalMensaje = 'Inicio de sesión correcto';
+        this.mostrarModal = true;
+        this.form.reset();
     })
-    .catch((error) => {
-      console.error('Error al hacer login:', error);
-      // Puedes mostrar un mensaje de error al usuario
+      .catch((error) => {
+        this.modalMensajeError = 'Correo o contraseña incorrectos';
+        this.mostrarModalError = true;
+        this.form.reset();
     });
   }
 
+
   enviar(): any {
-    if (this.form.valid) {
-      console.log('Formulario válido');
-      this.login()
-    } else {
-      console.log('Formulario no válido');
+    //si la contraseña tiene menos que los caracteres que hemos especificado
+    if (this.form.get('contrasenia')?.hasError('minlength')) {
+      this.modalMensajeError = 'La contraseña debe tener al menos 6 caracteres';
+      this.mostrarModalError = true;
+    } else if(this.form.invalid){
+      this.modalMensajeError = 'Por favor, completa todos los campos';
+      this.mostrarModalError = true;
+    }else{
+      this.login();
     }
   }
+
+  navigateTo(route:string){
+    this.router.navigate(['route']);
+  }
+
+  cerrarModal(){
+    this.mostrarModal = false;
+    this.mostrarModalError = false;
+  }
+
+  
   addUsuario(){
     const usuario: usuarioModelo = {
       usuario_id: 0,
