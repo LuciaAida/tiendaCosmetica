@@ -24,6 +24,10 @@
       <button class="enviar" type="submit" >Crear cuenta</button> 
     </div> <!-- Este es el cierre de "formulario-usuario" -->
   </form>
+  <div class="login">
+    <p>¿Ya tienes una cuenta en <strong>BeautyLu</strong>?</p>
+    <button class="opciones" (click)="navigateTo('login')">Iniciar sesión</button>
+  </div>
 </div> <!-- Este es el cierre de "crearCuenta" -->
 
 <div class="modal" *ngIf="mostrarModalError">
@@ -36,7 +40,7 @@
 <div class="modal" *ngIf="mostrarModal">
   <div class="modal-contenido">
     <p>{{modalMensaje}}</p>
-    <button class="opciones" (click)="navigateTo('/login')">Aceptar</button>
+    <button class="opciones" (click)="navigateTo('lista')">Aceptar</button>
   </div>
 </div>
   

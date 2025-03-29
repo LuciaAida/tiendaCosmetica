@@ -91,7 +91,7 @@ export class CrearCuentaComponent implements OnInit{
   
 
   navigateTo(route:string){
-    this.router.navigate(['route']);
+    this.router.navigate([route]);
   }
 
   cerrarModal(){

@@ -11,8 +11,10 @@
   
       <button class="enviar" type="submit">Iniciar sesión</button> 
     </div> 
+   
   </form>
 </div> 
+
 
 <div class="modal" *ngIf="mostrarModalError">
   <div class="modal-contenido">
@@ -24,7 +26,7 @@
 <div class="modal" *ngIf="mostrarModal">
   <div class="modal-contenido">
     <p>{{modalMensaje}}</p>
-    <button class="opciones" (click)="navigateTo('/login')">Aceptar</button>
+    <button class="opciones" (click)="navigateTo('lista')">Aceptar</button>
   </div>
 </div>
 

@@ -32,11 +32,15 @@ export class LoginComponent {
   }
 
   ngOnInit(): void {
-    console.log("Crear cuenta inicializado");
     this.form = this.formBuilder.group({
       correo: ['', [Validators.required, Validators.email]],
       contrasenia: ['', [Validators.required, Validators.minLength(6)]]
     })
+
+
+    // if(this.estaAutenticado()){
+    //   this.router.navigate(['/lista']);
+    // }
   }
 
 
@@ -69,8 +73,12 @@ export class LoginComponent {
     }
   }
 
+  // estaAutenticado():boolean{
+  //   return localStorage.getItem('usuario') != null; //true -> si esta activa
+  // }
+
   navigateTo(route:string){
-    this.router.navigate(['route']);
+    this.router.navigate([route]);
   }
 
   cerrarModal(){
