@@ -1,1 +1,45 @@
-<p>producto-anyadir works!</p>
+<div class="añadir-producto">
+    <form [formGroup]="form" (ngSubmit)="enviar()">
+      <div class="formulario-producto">
+        <label for="productoImg">Añadir imagen del producto:</label>
+        <input id="productoImg" type="file" formControlName="file"  (change)="onFileSelected($event)" accept="image/*" required/>
+  
+        <label for="productoNombre">Nombre:</label>
+        <input id="productoNombre" type="text" formControlName="nombre" placeholder="Nombre del producto" />
+  
+        <label for="productoTipo">Tipo de producto:</label>
+        <select id="productoTipo" formControlName="tipo" (change)="onTipoChange()">
+          <option *ngFor="let tipo of tipos" [value]="tipo.id">{{ tipo.nombre }}</option>
+        </select>
+  
+        <label for="productoSubtipos">Subcategoría:</label>
+        <select id="productoSubtipo" formControlName="subtipo">
+          <option *ngFor="let subtipo of subtiposFiltrados" [value]="subtipo.id">{{ subtipo.nombre }}</option>
+        </select>
+  
+        <label for="productoDescripcion">Descripción:</label>
+        <textarea id="productoDescripcion" formControlName="descripcion" placeholder="Descripción"></textarea>
+  
+        <label for="productoPrecio">Precio:</label>
+        <input id="productoPrecio" type="number" formControlName="precio" placeholder="Precio del producto" />
+  
+        <button class="enviar" type="submit" [disabled]="!form.valid"> Añadir producto</button>
+      </div>
+    </form>
+  </div>
+  
+  <!-- <div class="modal" *ngIf="mostrarModalError">
+    <div class="modal-contenido">
+      <p>{{ modalMensajeError }}</p>
+      <button class="detalle-añadir" (click)="cerrarModal()">Aceptar</button>
+    </div>
+  </div>
+
+  <div class="modal" *ngIf="mostrarModal">
+    <div class="modal-contenido">
+      <p>{{ modalMensaje }}</p>
+      <button class="detalle-añadir" (click)="volverAtras()">Aceptar</button>
+      <button class="detalle-añadir" (click)="cerrarModal()">Cerrar</button>
+    </div>
+  </div>
+   -->

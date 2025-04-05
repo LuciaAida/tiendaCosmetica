@@ -5,6 +5,8 @@ import { FormContactoComponent } from './components/footer/form-contacto/form-co
 import { CestaCompraComponent } from './components/main/usuario/cesta-compra/cesta-compra.component';
 import { InfoPersonalComponent } from './components/main/usuario/info-personal/info-personal.component';
 import { CrearCuentaComponent } from './components/main/usuario/crearCuenta/crear-cuenta.component';
+import { ProductoAnyadirComponent } from './components/main/producto/producto-anyadir/producto-anyadir.component';
+
 export const routes: Routes = [
   { path: '', redirectTo: 'lista', pathMatch: 'full' },
   { path: 'lista', component: ListaProductosComponent },
@@ -13,5 +15,6 @@ export const routes: Routes = [
   { path: 'formCont', component: FormContactoComponent },
   { path: 'cestaComp', component: CestaCompraComponent },
   { path: 'infoPers', component: InfoPersonalComponent },
+  {path:'anyadirProd', component:ProductoAnyadirComponent},
   { path: '**', redirectTo: 'lista' }
 ];

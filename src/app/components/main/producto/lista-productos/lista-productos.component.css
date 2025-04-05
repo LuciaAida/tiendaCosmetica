@@ -1,0 +1,19 @@
+.agregar {
+    display: block;
+    margin: 0 auto; /* Centra el botón horizontalmente */
+    background-color: #585757;
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 200px;
+}
+
+.agregar:hover {
+    background-color: #808080;
+    transform: scale(1.02);
+}

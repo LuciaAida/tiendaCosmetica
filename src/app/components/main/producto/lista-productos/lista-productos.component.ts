@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lista-productos',
@@ -8,5 +9,11 @@ import { Component } from '@angular/core';
   styleUrl: './lista-productos.component.css'
 })
 export class ListaProductosComponent {
+
+  constructor(private router: Router){}
+
+  navigateTo(route:string){
+    this.router.navigate([route]);
+  }
 
 }
