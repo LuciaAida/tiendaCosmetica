@@ -12,7 +12,7 @@ import { environment } from './environments/environment';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()), // autenticación
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),

@@ -2,7 +2,12 @@
     <form [formGroup]="form" (ngSubmit)="enviar()">
       <div class="formulario-producto">
         <label for="productoImg">Añadir imagen del producto:</label>
-        <input id="productoImg" type="file" formControlName="file"  (change)="onFileSelected($event)" accept="image/*" required/>
+        <input #fileInput 
+          id="productoImg" 
+          type="file" 
+          (change)="onFileSelected($event)" 
+          accept="image/*"
+          required>
   
         <label for="productoNombre">Nombre:</label>
         <input id="productoNombre" type="text" formControlName="nombre" placeholder="Nombre del producto" />
@@ -23,23 +28,22 @@
         <label for="productoPrecio">Precio:</label>
         <input id="productoPrecio" type="number" formControlName="precio" placeholder="Precio del producto" />
   
-        <button class="enviar" type="submit" [disabled]="!form.valid"> Añadir producto</button>
+        <button class="enviar" type="submit"> Añadir producto</button>
       </div>
     </form>
   </div>
   
-  <!-- <div class="modal" *ngIf="mostrarModalError">
+  <div class="modal" *ngIf="mostrarModalError" style="display: flex;">
     <div class="modal-contenido">
       <p>{{ modalMensajeError }}</p>
-      <button class="detalle-añadir" (click)="cerrarModal()">Aceptar</button>
+      <button class="opciones" (click)="cerrarModal()">Aceptar</button>
     </div>
   </div>
 
-  <div class="modal" *ngIf="mostrarModal">
+  <div class="modal" *ngIf="mostrarModal"style="display: flex;">
     <div class="modal-contenido">
       <p>{{ modalMensaje }}</p>
-      <button class="detalle-añadir" (click)="volverAtras()">Aceptar</button>
-      <button class="detalle-añadir" (click)="cerrarModal()">Cerrar</button>
+      <button class="opciones" (click)="navigateTo('lista')">Aceptar</button>
     </div>
   </div>
-   -->
+  

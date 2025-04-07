@@ -13,7 +13,7 @@ export class AuthService {
   private nombreUsuario = new BehaviorSubject<string>('');
 
   constructor() {
-    initializeApp(environment.firebaseConfig);
+    initializeApp(environment.firebase);
     this.auth = getAuth();
 
   }

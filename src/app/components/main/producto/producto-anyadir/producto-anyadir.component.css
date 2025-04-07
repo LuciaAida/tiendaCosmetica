@@ -63,3 +63,48 @@ body {
     background-color: #808080;
     transform: scale(1.02);
 }
+
+/*------------------------------MODAL-------------------------*/
+.modal {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    display: flex;
+    overflow: auto;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-contenido {
+    background-color: #EFEFEF;
+    padding: 20px;
+    border: 1px solid;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    font-size: 25px;
+    max-width: 400px;
+    width: 90%;
+  }
+  
+  .opciones {
+    background-color: #585757;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .opciones:hover {
+    background-color: #808080;
+    transform: scale(1.05);
+  }
+  
