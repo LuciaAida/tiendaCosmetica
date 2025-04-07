@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { getDownloadURL, getStorage, provideStorage, ref, Storage, uploadBytes } from '@angular/fire/storage';
+import { Storage } from '@angular/fire/storage';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProductoService } from '../../../../service/producto.service';
 import { Router } from '@angular/router';
@@ -23,24 +23,23 @@ export class ProductoAnyadirComponent implements OnInit {
 
   tipos = [
     { id: 'pelo', nombre: 'Pelo' },
-    { id: 'piel', nombre: 'Piel' },
+    { id: 'cuidadoFacial', nombre: 'Cuidado facial' },
     { id: 'peloRizado', nombre: 'Pelo Rizado' }
   ]
 
   subtipos = [
-    { id: '1', nombre: 'Piel grasa', tipoId: 'piel' },
-    { id: '2', nombre: 'Piel seca', tipoId: 'piel' },
-    { id: '3', nombre: 'Piel mixta', tipoId: 'piel' },
-    { id: '4', nombre: 'Piel sensible', tipoId: 'piel' },
+    { id: '1', nombre: 'Hidratantes', tipoId: 'cuidadoFacial' },
+    { id: '2', nombre: 'Limpiadores', tipoId: 'cuidadoFacial' },
+    { id: '3', nombre: 'Mascarillas', tipoId: 'cuidadoFacial' },
 
-    { id: '5', nombre: 'Champú de Pelo', tipoId: 'pelo' },
-    { id: '6', nombre: 'Acondicionador de Pelo', tipoId: 'pelo' },
-    { id: '7', nombre: 'Mascarilla de Pelo', tipoId: 'pelo' },
+    { id: '4', nombre: 'Champú de Pelo', tipoId: 'pelo' },
+    { id: '5', nombre: 'Acondicionador de Pelo', tipoId: 'pelo' },
+    { id: '6', nombre: 'Mascarilla de Pelo', tipoId: 'pelo' },
 
-    { id: '8', nombre: 'Champú de Pelo Rizado', tipoId: 'peloRizado' },
-    { id: '9', nombre: 'Acondicionador de Pelo Rizado', tipoId: 'peloRizado' },
-    { id: '10', nombre: 'Mascarilla de Pelo Rizado', tipoId: 'peloRizado' },
-    { id: '11', nombre: 'Activador de rizos', tipoId: 'peloRizado' }
+    { id: '7', nombre: 'Champú de Pelo Rizado', tipoId: 'peloRizado' },
+    { id: '8', nombre: 'Acondicionador de Pelo Rizado', tipoId: 'peloRizado' },
+    { id: '9', nombre: 'Mascarilla de Pelo Rizado', tipoId: 'peloRizado' },
+    { id: '10', nombre: 'Activador de rizos', tipoId: 'peloRizado' }
   ];
 
   constructor(
@@ -72,18 +71,18 @@ export class ProductoAnyadirComponent implements OnInit {
 
   private getPrimerSubtipo(tipoId: string): string {
     const subtipos = this.subtipos.filter(subtipo => subtipo.tipoId === tipoId); //coincide tipoid con id del tipo producto
-    return subtipos[0].id;
+    return subtipos.length > 0 ? subtipos[0].id : ''; //comprueba si subtipos tiene elementos
   }
 
 
   onTipoChange(): void {
-    const tipoSeleccionado = this.form.get('tipo')?.value; //tipo seleccionado del form
-    if (tipoSeleccionado) {
-      this.subtiposFiltrados = this.subtipos.filter(subtipo => subtipo.tipoId === tipoSeleccionado);
-    } else {
-      this.subtiposFiltrados = this.subtipos; // Muestra todos los subtipos si no se ha seleccionado un tipo
-    }
+    const tipoSeleccionado = this.form.get('tipo')?.value;
+    this.subtiposFiltrados = this.subtipos.filter(subtipo => subtipo.tipoId === tipoSeleccionado);
+    this.form.patchValue({ //actualiza los subtipos dependiendo del tipo
+      subtipo: this.getPrimerSubtipo(tipoSeleccionado)
+    });
   }
+  
 
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];

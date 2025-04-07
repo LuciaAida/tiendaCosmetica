@@ -52,17 +52,17 @@ li:hover{
 }
 
 /*--------------------------PIEL / CUENTA-------------------------*/
-.piel, .cuenta{
+.cuidadoFacial, .cuenta{
     position: relative;
 }
-.tipos-piel, .propiedades-cuenta{
+.tipos-cuidado, .propiedades-cuenta{
     display: none; /*submenu oculto*/
     position: absolute;
     list-style: none;
     padding: 10px 0;
     margin-top: 5%;
 }
-.tipos-piel li, .propiedades-cuenta li{ 
+.tipos-cuidado li, .propiedades-cuenta li{ 
     width: 190px;
     transform: translateX(-20px);
     border-top: solid 1px #fff;
@@ -70,10 +70,10 @@ li:hover{
     text-align: center;
     background-color: #EFEFEF;
 }
-.tipos-piel li:hover, .propiedades-cuenta li:hover{
+.tipos-cuidado li:hover, .propiedades-cuenta li:hover{
     background-color:#caebf2 ;
 }
-.piel:hover > .tipos-piel, .cuenta:hover > .propiedades-cuenta{
+.cuidadoFacial:hover > .tipos-cuidado, .cuenta:hover > .propiedades-cuenta{
     display: block; /*para mostrar los tipos*/
 }
 
