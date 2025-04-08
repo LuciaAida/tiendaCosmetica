@@ -44,6 +44,12 @@ body {
     background-color: #EFEFEF;
 }
 
+.formulario-producto textarea{
+    height: 150px;
+    resize: none; /* prohibe cambiar el tamaño*/
+    overflow-y: auto; /* barra de desplazamiento*/
+}
+
 .enviar {
     display: block;
     margin: 0 auto;

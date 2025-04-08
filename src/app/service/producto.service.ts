@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { addDoc, Firestore } from '@angular/fire/firestore';
+import { addDoc, collectionData, Firestore } from '@angular/fire/firestore';
 import { Storage, ref, getDownloadURL, uploadBytes } from '@angular/fire/storage';
 import { collection } from 'firebase/firestore';
+import { productoModelo } from '../components/main/producto/modelo/producto.modelo';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +39,11 @@ subirProductoCompleto(productoData: any, archivo: File): Promise<void> {
         console.error('Error en el servicio:', error);
         throw error; // Propagar el error al componente
       });
+  }
+
+  getProductos(): Observable<productoModelo[]> {
+    const productosRef = collection(this.firestore, 'productos');
+    return collectionData(productosRef, { idField: 'id' }) as Observable<productoModelo[]>;
   }
 
   guardarProducto(producto: any): Promise<void> {
