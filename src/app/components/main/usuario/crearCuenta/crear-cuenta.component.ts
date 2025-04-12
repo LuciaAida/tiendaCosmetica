@@ -36,15 +36,16 @@ export class CrearCuentaComponent implements OnInit{
       correo: ['', [Validators.required, Validators.email]],
       contrasenia: ['', [Validators.required, Validators.minLength(6)]],
       confContrasenia: ['', [Validators.required, Validators.minLength(6)]],
-      condiciones: [false, Validators.requiredTrue]
+      condiciones: [false, Validators.requiredTrue],
+      esAdmin:false
     },{
       validators: this.contraseniasNoCoinciden
     });
   }
 
   registro(){
-    const {correo, contrasenia } = this.form.value;
-    this.auService.register(correo, contrasenia).then(() => {
+    const {correo, contrasenia, nombre } = this.form.value;
+    this.auService.register(correo, contrasenia, nombre).then(() => {
       this.modalMensaje = 'Registro correcto';
         this.mostrarModal = true;
         this.form.reset();
@@ -106,7 +107,8 @@ export class CrearCuentaComponent implements OnInit{
       nombre: this.form.value.nombre,
       correo: this.form.value.correo,
       contrasenia: this.form.value.contrasenia,
-      confContrasenia: this.form.value.confContrasenia
+      confContrasenia: this.form.value.confContrasenia,
+      esAdmin: false
     };
   
   }

@@ -4,6 +4,7 @@
     background-color: #EFEFEF;
     justify-content: space-around; /*espacio entre logo y barra de navegacion*/
     align-items: center;
+    padding: 7px 7px;
     margin-top: 15px;
     text-align: center;
     border-top: 1px solid #ccc;

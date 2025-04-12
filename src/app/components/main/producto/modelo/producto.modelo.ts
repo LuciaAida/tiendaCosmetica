@@ -1,5 +1,5 @@
 export interface productoModelo {
-    id?: number;  
+    id?: string;  
     nombre: string;
     tipo: string;  
     subtipo: string;

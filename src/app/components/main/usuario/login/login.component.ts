@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../../service/aut-service.service';
 import { Router } from '@angular/router';
+import { Firestore } from '@angular/fire/firestore';
+import { UsuarioService } from '../../../../service/usuario.service';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +18,7 @@ import { Router } from '@angular/router';
 
 export class LoginComponent {
  public form!: FormGroup;
+ esAdmin: boolean = false;
  mostrarModal: boolean = false;
  mostrarModalError: boolean = false;
  modalMensaje: string = '';
@@ -27,20 +30,20 @@ export class LoginComponent {
   constructor(
     private autenService:AuthService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private firestore: Firestore,
+    private usuarioService: UsuarioService
   ){
   }
 
   ngOnInit(): void {
+    // this.autenService.esAdmin$.subscribe(esAdmin => {
+    //   this.esAdmin = esAdmin;
+    // });
     this.form = this.formBuilder.group({
       correo: ['', [Validators.required, Validators.email]],
       contrasenia: ['', [Validators.required, Validators.minLength(6)]]
     })
-
-
-    // if(this.estaAutenticado()){
-    //   this.router.navigate(['/lista']);
-    // }
   }
 
 
@@ -93,7 +96,8 @@ export class LoginComponent {
       nombre: this.form.value.nombre,
       correo: this.form.value.correo,
       contrasenia: this.form.value.contrasenia,
-      confContrasenia: this.form.value.confContrasenia
+      confContrasenia: this.form.value.confContrasenia,
+      esAdmin: false
     };
   }
 }

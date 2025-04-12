@@ -4,4 +4,5 @@ export interface usuarioModelo {
     correo: string;
     contrasenia: string;
     confContrasenia: string;   
+    esAdmin: boolean;
   }

@@ -1,4 +1,4 @@
-<button class="agregar" (click)="navigateTo('anyadirProd')">Añadir productos</button> 
+<button class="agregar" *ngIf="esAdmin" (click)="navigateTo('anyadirProd')">Añadir productos</button> 
 
 <div class="overflow">
     <div class="modal-contenido" *ngIf="productos.length == 0">
@@ -13,22 +13,19 @@
         <p>{{ acortarDescripcion(producto.descripcion || '', producto.urlImagen.length > 100) }}</p>
         <p class="precio">{{ producto.precio }}€</p>
         
-        <!-- <div class="grupo-botones">
-          <button (click)="eliminarAnimal(animal.animal_id)">
+        <div class="grupo-botones">
+          <button *ngIf="esAdmin" (click)="eliminarProducto(producto.id!, i)">
             Eliminar
             <img src="https://cdn-icons-png.flaticon.com/512/860/860829.png" class="basura">
           </button>
-  
-          <div class="modal" *ngIf="mostrarModal">
+        
+          <div class="modal" *ngIf="mostrarModal"style="display: flex;">
             <div class="modal-contenido">
               <p>{{ modalMensaje }}</p>
-              <button class="detalles-boton" (click)="confirmarEliminacion()">Aceptar</button>
-              <button class="detalles-boton" (click)="cerrarModal()">Cerrar</button>
+              <button class="opciones"  (click)="cerrarModal()">Aceptar</button>
             </div>
           </div>
-  
-         
-        </div> -->
+
       </div>
     </div>
   </div>

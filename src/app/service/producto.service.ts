@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { addDoc, collectionData, Firestore } from '@angular/fire/firestore';
+import { addDoc, collectionData, deleteDoc, doc, Firestore } from '@angular/fire/firestore';
 import { Storage, ref, getDownloadURL, uploadBytes } from '@angular/fire/storage';
 import { collection } from 'firebase/firestore';
 import { productoModelo } from '../components/main/producto/modelo/producto.modelo';
@@ -52,5 +52,9 @@ subirProductoCompleto(productoData: any, archivo: File): Promise<void> {
     return addDoc(productosRef, producto) // <- Retornar la promesa directamente
     .then(() => {})
     .catch(error => { throw error; });
-}
+  }
+
+  eliminarProducto(id: string) {
+    return deleteDoc(doc(this.firestore, 'productos', id));
+  }
 }
