@@ -5,11 +5,9 @@
       <p>No hay productos disponibles</p>
     </div>
     <div class="producto-grid" *ngIf="productos.length > 0">
-      <div class="carta-producto" *ngFor="let producto of productos; let i = index" (click)="navigateTo('detalle')" style="cursor: pointer;">
+      <div class="carta-producto" *ngFor="let producto of productos; let i = index" (click)="navigateTo('detalle', producto.id!)" style="cursor: pointer;">
         <h3>{{ producto.nombre }}</h3>
          <img [src]="producto.urlImagen" alt="Vista Previa de la Imagen" style="width: 85%; margin: 0 auto; text-align: center;"/> 
-        <!-- <p><strong>Tipo:</strong> {{ getTipoNombre(producto.tipo_id) }}</p> 
-        <p><strong>Subtipo:</strong> {{ getSubtipo(producto.subtipo) }}</p>  -->
         <p>{{ acortarDescripcion(producto.descripcion || '', producto.urlImagen.length > 100) }}</p>
         <p class="precio">{{ producto.precio }}€</p>
         

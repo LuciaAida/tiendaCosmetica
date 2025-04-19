@@ -1,33 +1,30 @@
-<!-- <div class="detalles-producto" *ngIf="formProducto">
-    <form [formGroup]="formProducto" (ngSubmit)="send()">
-      <div class="producto">
-        <div class="producto-imagen">
-          <img [src]="producto!.foto_url" alt="Vista Previa de la Imagen"
-            style="width: 40%; margin: 0 auto; text-align: center;" />
-        </div>
-        <div class="producto-nombre">
-          <input type="text" [disabled]="!isEditing" formControlName="nombre" />
-        </div>
+<div class="detalles-producto" *ngIf="formProducto">
+  <form [formGroup]="formProducto" (ngSubmit)="enviar()">
+    <div class="producto">
+      <div class="producto-imagen">
+        <img [src]="producto!.urlImagen" alt="Vista Previa de la Imagen"
+          style="width: 40%; margin: 0 auto; text-align: center;" />
       </div>
-  
-      <div class="elemento-detalles">
-        <label>Precio:</label>
-        <input type="number" [disabled]="!isEditing" formControlName="precio" />
+      <div class="producto-nombre">
+        <input type="text" [disabled]="!isEditing" formControlName="nombre" />
       </div>
-  
-      <div class="elemento-detalles">
-        <label>Categoría:</label>
-        <select [disabled]="!isEditing" formControlName="categoria_id">
-          <option *ngFor="let categoria of categoriasProducto" [value]="categoria.id">{{ categoria.nombre }}</option>
-        </select>
-      </div>
-  
+    </div>
+
+    <div class="elemento-detalles">
+      <label>Precio:</label>
+      <input type="number" [disabled]="!isEditing" formControlName="precio" />
+    </div>
+
       <div class="elemento-detalles">
         <label>Descripción:</label>
         <textarea [disabled]="!isEditing" formControlName="descripcion"></textarea>
       </div>
   
-      <div class="contenedor-modal">
+      <div class="contenedor-modal" *ngIf="!isEditing && esAdmin">
+        <button type="button" class="editar-boton" (click)="habilitarEdicion()">Editar</button>
+      </div>
+  
+      <div class="contenedor-modal" *ngIf="isEditing">
         <button class="volver-boton" (click)="volverALaLista()">Volver a la lista</button>
         <button type="submit" class="editar-boton">Guardar cambios</button>
       </div>
@@ -40,4 +37,3 @@
       <button class="detalle-añadir" (click)="cerrarModal()">Aceptar</button>
     </div>
   </div>
-   --> 

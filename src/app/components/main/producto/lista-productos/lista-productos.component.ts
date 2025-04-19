@@ -56,8 +56,12 @@ export class ListaProductosComponent implements OnInit{
     return description.length > limiteFinal ? description.substring(0, limiteFinal) + '...' : description;
 }
   
-  navigateTo(route:string){
-    this.router.navigate([route]);
+  navigateTo(route:string, id?:string){
+    if (id) {
+      this.router.navigate([route, id]);
+    } else {
+      this.router.navigate([route]);
+    }
   }
 
   eliminarProducto(id: string, index: number) {

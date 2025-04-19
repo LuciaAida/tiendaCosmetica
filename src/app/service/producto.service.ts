@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { addDoc, collectionData, deleteDoc, doc, Firestore } from '@angular/fire/firestore';
+import { addDoc, collectionData, deleteDoc, doc, docData, Firestore, updateDoc } from '@angular/fire/firestore';
 import { Storage, ref, getDownloadURL, uploadBytes } from '@angular/fire/storage';
 import { collection } from 'firebase/firestore';
 import { productoModelo } from '../components/main/producto/modelo/producto.modelo';
@@ -57,4 +57,15 @@ subirProductoCompleto(productoData: any, archivo: File): Promise<void> {
   eliminarProducto(id: string) {
     return deleteDoc(doc(this.firestore, 'productos', id));
   }
+
+  actualizarProducto(id: string, productoActualizado: productoModelo) {
+    const productoRef = doc(this.firestore, `productos/${id}`);
+    return updateDoc(productoRef, { ...productoActualizado });
+  }
+
+  obtenerProductoPorId(id: string): Observable<productoModelo | undefined> {
+    const productoDoc = doc(this.firestore, `productos/${id}`);
+    return docData(productoDoc, { idField: 'id' }) as Observable<productoModelo | undefined>;
+  }
+  
 }
