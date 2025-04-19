@@ -2,38 +2,38 @@
   <form [formGroup]="formProducto" (ngSubmit)="enviar()">
     <div class="producto">
       <div class="producto-imagen">
-        <img [src]="producto!.urlImagen" alt="Vista Previa de la Imagen"
-          style="width: 40%; margin: 0 auto; text-align: center;" />
+        <img [src]="producto!.urlImagen" alt="Vista Previa de la Imagen" />
       </div>
       <div class="producto-nombre">
-        <input type="text" [disabled]="!isEditing" formControlName="nombre" />
+        <input type="text" [readonly]="!esAdmin" formControlName="nombre" />
       </div>
     </div>
 
     <div class="elemento-detalles">
-      <label>Precio:</label>
-      <input type="number" [disabled]="!isEditing" formControlName="precio" />
+      <label style="font-size: 18px;">Precio:</label>
+      <input type="number" [readonly]="!esAdmin" formControlName="precio" />
     </div>
 
-      <div class="elemento-detalles">
-        <label>Descripción:</label>
-        <textarea [disabled]="!isEditing" formControlName="descripcion"></textarea>
-      </div>
-  
-      <div class="contenedor-modal" *ngIf="!isEditing && esAdmin">
-        <button type="button" class="editar-boton" (click)="habilitarEdicion()">Editar</button>
-      </div>
-  
-      <div class="contenedor-modal" *ngIf="isEditing">
-        <button class="volver-boton" (click)="volverALaLista()">Volver a la lista</button>
-        <button type="submit" class="editar-boton">Guardar cambios</button>
-      </div>
-    </form>
-  </div>
-  
-  <div class="modal" *ngIf="mostrarModal">
-    <div class="modal-contenido">
-      <p>{{ modalMensaje }}</p>
-      <button class="detalle-añadir" (click)="cerrarModal()">Aceptar</button>
+    <div class="elemento-detalles">
+      <label style="font-size: 18px;">Descripción:</label>
+      <textarea [readonly]="!esAdmin" formControlName="descripcion"></textarea>
     </div>
+
+    <div class="contenedor-modal" >
+      <button *ngIf="!isEditing && esAdmin" type="button" class="editar-boton" (click)="habilitarEdicion()">Editar</button>
+      <button type="button" class="editar-boton" (click)="navigateTo('cestaComp')">Añadir a la cesta</button>
+    </div>
+
+    <div class="contenedor-modal" *ngIf="isEditing">
+      <button class="volver-boton" (click)="navigateTo('lista')">Volver a la lista</button>
+      <button type="submit" class="editar-boton">Guardar cambios</button>
+    </div>
+  </form>
+</div>
+
+<div class="modal" *ngIf="mostrarModal">
+  <div class="modal-contenido">
+    <p>{{ modalMensaje }}</p>
+    <button class="detalle-editar" (click)="cerrarModal()">Aceptar</button>
   </div>
+</div>

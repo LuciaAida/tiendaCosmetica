@@ -86,8 +86,7 @@ export class ProductoDetalleComponent implements OnInit{
     this.router.navigate(['/productos/lista']);
   }
 
-  volverALaLista(): void {
-    this.router.navigate(['/productos/lista']);
+  navigateTo(route: string) {
+    this.router.navigate([route]);
   }
-
 }

@@ -1,103 +1,141 @@
 .detalles-producto {
-    background-color: #c17a48;
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 600px;
-    margin: auto;
-  }
-  
-  .producto {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .producto-imagen {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .producto-nombre {
-    margin-top: 15px;
-    width: 100%;
-  }
-  
-  .producto-nombre input {
-    font-size: 20px;
-    width: 100%;
-    background: none;
-    border: none;
-    color: black;
-  }
-  
-  .elemento-detalles {
-    margin-bottom: 15px;
-    width: 100%;
-  }
-  
-  .elemento-detalles label {
-    font-weight: bold;
-  }
-  
-  .elemento-detalles input, .elemento-detalles select, .elemento-detalles textarea {
-    font-size: 16px;
-    padding: 5px;
-    border: 1px solid #dab897;
-    border-radius: 5px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  
-  textarea {
-    height: 100px;
-    resize: none;
-  }
-  
-  .contenedor-modal {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .volver-boton, .editar-boton {
-    background-color: #7b2f0e;
-    color: #d4c4b4;
-    padding: 10px 20px;
-    border: none;
-    font-size: 16px;
-    border-radius: 5px;
-    margin-top: 20px;
-    text-align: center;
-    cursor: pointer;
-  }
-  
-  .editar-boton:hover, .volver-boton:hover {
-    background-color: #360408;
-  }
-  
-  .modal {
-    display: flex;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .modal-contenido {
-    background-color: #804b35;
-    padding: 20px;
-    border: 1px solid #501b04;
-    width: 90%; /* Mejor para pantallas pequeñas */
-    max-width: 400px;
-    font-size: 18px;
-    text-align: center;
-    border-radius: 10px;
-    color: white;
-  }
-  
+  background-color: #f9f9f9;
+  padding: 25px; 
+  padding-bottom: 45px;
+  border-radius: 12px;
+  max-width: 600px;
+  margin: 50px auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.producto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.producto-imagen {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.producto-imagen img {
+  width: 40%; 
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.producto-nombre input {
+  font-size: 19px; 
+  width: 100%;
+  background-color: #f9f9f9;
+  border: none;
+  border-bottom: 1px solid #474747;
+  color: #333;
+  padding: 8px; 
+  margin-top: 10px;
+  text-align: center;
+}
+
+.elemento-detalles {
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.elemento-detalles label {
+  font-weight: bold;
+  color: #474747;
+  margin-bottom: 8px; 
+  display: block;
+  font-size: 15px; 
+}
+
+.elemento-detalles input,
+.elemento-detalles select,
+.elemento-detalles textarea {
+  font-size: 15px; 
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+textarea {
+  height: 130px; 
+  resize: none;
+}
+
+.contenedor-modal {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px; 
+}
+
+.volver-boton,
+.editar-boton {
+  background-color: #585757;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  font-size: 18px;
+  border-radius: 8px;
+  margin-top: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.editar-boton:hover,
+.volver-boton:hover,
+.detalle-editar:hover {
+  background-color: #808080;
+  transform: scale(1.05);
+}
+
+.modal {
+  display: flex;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-contenido {
+  background-color: #EFEFEF;
+  padding: 25px; 
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  font-size: 22px;
+  max-width: 380px;
+  width: 85%;
+}
+
+.detalle-editar {
+  background-color: #585757;
+  color: #ffffff;
+  padding: 10px 20px; 
+  border: none;
+  font-size: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.detalle-editar:hover {
+  background-color: #808080;
+  transform: scale(1.05); 
+}
