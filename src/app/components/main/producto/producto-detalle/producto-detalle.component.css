@@ -76,7 +76,8 @@ textarea {
 }
 
 .volver-boton,
-.editar-boton {
+.editar-boton,
+.cesta-boton {
   background-color: #585757;
   color: #fff;
   padding: 10px 20px;
@@ -91,7 +92,8 @@ textarea {
 
 .editar-boton:hover,
 .volver-boton:hover,
-.detalle-editar:hover {
+.detalle-editar:hover,
+.cesta-boton:hover {
   background-color: #808080;
   transform: scale(1.05);
 }
@@ -138,4 +140,9 @@ textarea {
 .detalle-editar:hover {
   background-color: #808080;
   transform: scale(1.05); 
+}
+
+.carro-compra {
+  width: 20px;
+  height: 20px;
 }

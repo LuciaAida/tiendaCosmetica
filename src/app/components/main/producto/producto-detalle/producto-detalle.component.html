@@ -21,7 +21,10 @@
 
     <div class="contenedor-modal" >
       <button *ngIf="!isEditing && esAdmin" type="button" class="editar-boton" (click)="habilitarEdicion()">Editar</button>
-      <button type="button" class="editar-boton" (click)="navigateTo('cestaComp')">Añadir a la cesta</button>
+      <button type="button" class="cesta-boton" (click)="anyadirACesta(producto)" >
+        Añadir a la cesta
+      <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" class="carro-compra" alt="Carrito de compra" >
+      </button>
     </div>
 
     <div class="contenedor-modal" *ngIf="isEditing">

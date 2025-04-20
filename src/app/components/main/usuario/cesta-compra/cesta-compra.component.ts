@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import {  Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cesta-compra',
@@ -10,32 +10,68 @@ import {  Router } from '@angular/router';
   templateUrl: './cesta-compra.component.html',
   styleUrl: './cesta-compra.component.css'
 })
-export class CestaCompraComponent implements OnInit{
-
-  public form!: FormGroup;
+export class CestaCompraComponent implements OnInit {
+  cesta: any[] = [];
 
   constructor(
-    private formBuilder: FormBuilder,
-    private router:Router
-  ){}
+    private router: Router
+  ) { }
 
-  ngOnInit(): void {
-      console.log("Mi cesta inicializado");
-      this.form = this.formBuilder.group({
-        correo: ['', [Validators.required, Validators.email]],
-        contrasenia: ['', [Validators.required, Validators.minLength(6)]]
-      })
-    }
+  ngOnInit() {
+    this.cargarCesta();
+  }
 
-    enviar(): any {
-      if (this.form.valid) {
-        console.log('Formulario válido');
-      } else {
-        console.log('Formulario no válido');
-      }
-    }
+  private cargarCesta() {
+    const datos = localStorage.getItem('cesta');
+    this.cesta = datos ? JSON.parse(datos) : [];
+    console.log('Cesta cargada:', this.cesta); 
+  }
 
-    navigateTo(route:string){
-      this.router.navigate([route]);
+
+  añadirACesta(producto: any) {
+    let cesta: any[] = JSON.parse(localStorage.getItem('cesta') || '[]');
+  
+    const indice = cesta.findIndex(p => p.id === producto.id);
+    if (indice !== -1) {
+      cesta[indice].cantidad += 1;
+    } else {
+      cesta.push({ ...producto, cantidad: 1 });
     }
+  
+    localStorage.setItem('cesta', JSON.stringify(cesta));
+  }
+  
+
+  sumarCantidad(producto: any) {
+    producto.cantidad++;
+    this.actualizarStorage();
+  }
+
+  restarCantidad(producto: any) {
+    if (producto.cantidad > 1) {
+      producto.cantidad--;
+      this.actualizarStorage();
+    }
+  }
+
+  eliminarProducto(producto: any) {
+    this.cesta = this.cesta.filter(p => p.id !== producto.id);
+    this.actualizarStorage();
+  }
+
+  actualizarStorage() {
+    localStorage.setItem('cesta', JSON.stringify(this.cesta));
+    this.cargarCesta(); 
+  }
+
+  hacerCompra() {
+    alert("¡Compra realizada!");
+    this.cesta = [];
+    localStorage.removeItem('cesta');
+  }
+
+
+  navigateTo(route: string) {
+    this.router.navigate([route]);
+  }
 }

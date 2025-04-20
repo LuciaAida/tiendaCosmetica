@@ -86,6 +86,26 @@ export class ProductoDetalleComponent implements OnInit{
     this.router.navigate(['/productos/lista']);
   }
 
+  anyadirACesta(producto: any) {
+    if (!producto) {
+      console.error('Producto no definido');
+      return;
+    }
+    let cesta: any[] = JSON.parse(localStorage.getItem('cesta') || '[]');
+  
+    const indice = cesta.findIndex(p => p.id === producto.id);
+    if (indice !== -1) {
+      cesta[indice].cantidad += 1;
+    } else {
+      cesta.push({ ...producto, cantidad: 1 });
+    }
+  
+    localStorage.setItem('cesta', JSON.stringify(cesta));
+  
+    this.router.navigate(['cestaComp']);
+  }
+  
+
   navigateTo(route: string) {
     this.router.navigate([route]);
   }
