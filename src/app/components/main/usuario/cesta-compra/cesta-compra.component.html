@@ -2,24 +2,41 @@
   <div *ngIf="cesta.length === 0" class="cesta-vacia">
     <p>Tu cesta está vacía</p>
   </div>
+
   <div *ngFor="let item of cesta" class="producto-cesta">
     <img [src]="item.urlImagen" alt="Producto" class="producto-imagen-cesta" />
+    
     <div class="info-producto">
       <h3>{{ item.nombre }}</h3>
-      <p>{{ item.precio | currency }}</p>
+      <p>Precio: {{ item.precio | currency }}</p>
+
       <div class="cantidad-control">
         <button (click)="restarCantidad(item)">-</button>
         <span>{{ item.cantidad }}</span>
         <button (click)="sumarCantidad(item)">+</button>
       </div>
+
+      <p class="total-producto">Total: {{ item.precio * item.cantidad | currency }}</p>
     </div>
+
     <button class="eliminar-boton" (click)="eliminarProducto(item)">
       <img src="https://cdn-icons-png.flaticon.com/512/860/860829.png" alt="Eliminar" />
     </button>
   </div>
 
+  <div class="total-general" *ngIf="cesta.length > 0">
+    <h2>Total de la compra: {{ calcularTotal() | currency }}</h2>
+  </div>
+
   <div class="acciones-cesta">
     <button (click)="navigateTo('lista')">Seguir comprando</button>
-    <button (click)="hacerCompra()">Hacer compra</button>
+    <button (click)="hacerCompra()">Tramitar pedido</button>
+  </div>
+</div>
+
+<div class="modal" *ngIf="mostrarModal">
+  <div class="modal-contenido">
+    <p>{{ modalMensaje }}</p>
+    <button class="detalle-editar" (click)="cerrarModal()">Aceptar</button>
   </div>
 </div>

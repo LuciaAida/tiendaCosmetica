@@ -1,12 +1,3 @@
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f0f0f0;
-}
-
-
 .infoPers {
     max-width: 650px;
     margin: 90px auto;
@@ -17,39 +8,68 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    
-}
-
-.infoPers2 {
-    width: 600px; /* El formulario ocupa todo el ancho */
-    display: flex;
-    font-size: 18px;
-    list-style:none;
-    flex-direction: column;
+    font-family: 'Segoe UI', sans-serif;
   }
   
-.infoPers2 label {
+  .infoPers h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .pregunta {
+    margin-bottom: 25px;
+    width: 100%;
+  }
+  
+  .pregunta p {
     font-weight: bold;
+    margin-bottom: 10px;
     color: #5f5e5e;
-    margin-bottom: 10px; /* Separación entre la etiqueta y el campo */
-}
-
-.enviar {
-    display: block;
-    margin: 0 auto; /* Centra el botón horizontalmente */
+  }
+  
+  .pregunta select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #474747;
+    border-radius: 5px;
+    background-color: #EFEFEF;
+  }
+  
+  button {
     background-color: #585757;
     color: #ffffff;
     border: none;
-    padding: 10px;
+    padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
-    text-align: center;
+    margin-top: 15px;
     transition: background-color 0.3s ease, transform 0.3s ease;
-    width: 200px;
-}
-
-.enviar:hover {
+  }
+  
+  button:hover {
     background-color: #808080;
     transform: scale(1.02);
-}
+  }
+  
+  button[disabled] {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .infoPers h3 {
+    color: #333;
+    font-size: 20px;
+    margin-top: 20px;
+  }
+  
+  .infoPers p {
+    font-size: 16px;
+    color: #444;
+    margin-top: 10px;
+    text-align: left;
+    max-width: 500px;
+  }
+  

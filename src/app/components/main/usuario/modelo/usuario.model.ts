@@ -5,4 +5,6 @@ export interface usuarioModelo {
     contrasenia: string;
     confContrasenia: string;   
     esAdmin: boolean;
+    testPiel?: string;
+    testPelo?: string;
   }
