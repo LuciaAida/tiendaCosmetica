@@ -13,7 +13,8 @@ import { AuthService } from '../../../../service/aut-service.service';
 })
 export class InfoPersonalComponent {
   usuarioId: string | null = null;
-  descripcionesTiposPiel : { [key: string]: string } = {
+  //PIEL
+  descripcionesTiposPiel: { [key: string]: string } = {
     normal: 'Tu piel tiene un equilibrio perfecto de hidratación y grasa.',
     seca: 'Tu piel necesita más hidratación y protección contra la pérdida de agua.',
     grasa: 'Tu piel produce más sebo de lo normal, necesita regulación.',
@@ -28,8 +29,26 @@ export class InfoPersonalComponent {
     { texto: '¿Tienes zonas con acné o espinillas?', opciones: ['Sí', 'No'] },
   ];
   respuestasPiel: string[] = Array(this.preguntasPiel.length).fill('');
-  tipoDetectado: string | null = null;
-  mostrarTest = false;
+  tipoDetectadoPiel: string | null = null;
+  mostrarTestPiel = false;
+
+  //PELO
+  descripcionesTiposPelo: { [key: string]: string } = {
+    graso: 'Se ensucia rápido y se ve brillante. Necesita lavados frecuentes.',
+    seco: 'Se ve opaco y se siente áspero. Le falta hidratación.',
+    normal: 'Se mantiene limpio y suave por varios días. No necesita muchos cuidados.',
+    mixto: 'Raíz grasa y puntas secas. Requiere productos equilibrados.',
+  };
+  preguntasPelo = [
+    { texto: '¿Con qué frecuencia sientes que tu cabello se ve grasoso o sucio?', opciones: ['A las pocas horas de lavarlo', 'Al día siguiente de lavarlo', 'Después de 2 o más días', 'Raramente, casi nunca'] },
+    { texto: '¿Cómo describirías el aspecto de tu cuero cabelludo?', opciones: ['Muy graso y con picor frecuente', 'Normal, sin molestias', 'Muy seco y con descamación', 'Sensible o con tendencia a irritarse'] },
+    { texto: '¿Cómo se siente tu cabello al tacto?', opciones: ['Pegajoso o apelmazado', 'Suave y manejable', 'Áspero o quebradizo', 'Seco en las puntas, pero graso en la raíz'] },
+    { texto: '¿Se te rompe o cae el cabello con facilidad?', opciones: ['Sí, constantemente', 'Ocasionalmente', 'Muy raramente', 'Solo cuando lo maltrato mucho'] },
+    { texto: '¿Cómo responde tu cabello al clima (frío o humedad)?', opciones: ['Se vuelve muy graso', 'No cambia mucho', 'Se reseca fácilmente', 'Se encrespa o se vuelve opaco'] },
+  ];
+  respuestasPelo: string[] = Array(this.preguntasPelo.length).fill('');
+  tipoDetectadoPelo: string | null = null;
+  mostrarTestPelo = false;
 
   constructor(private authService: AuthService, private usuarioService: UsuarioService) { }
 
@@ -40,7 +59,10 @@ export class InfoPersonalComponent {
         this.cargarTestUsuario();
 
         this.usuarioService.testPiel$.subscribe(resultado => {
-          this.tipoDetectado = resultado;
+          this.tipoDetectadoPiel = resultado;
+        });
+        this.usuarioService.testPelo$.subscribe(resultadoPelo => {
+          this.tipoDetectadoPelo = resultadoPelo;
         });
       }
     });
@@ -48,20 +70,104 @@ export class InfoPersonalComponent {
 
   cargarTestUsuario() {
     if (this.usuarioId) {
-      this.usuarioService.loadTestPiel(this.usuarioId); // Cargamos el test de piel
+      this.usuarioService.cargarTestPiel(this.usuarioId);
+      this.usuarioService.cargarTestPelo(this.usuarioId);
     }
   }
 
-  guardarResultado() {
-    if (this.usuarioId) {
-      const resultado = this.calcularTipoPiel(this.respuestasPiel);
-      this.usuarioService.saveTestPiel(this.usuarioId, resultado); // ✅ Usa el servicio correcto
-      this.mostrarTest = false;
+  guardarResultado(tipo: 'piel' | 'pelo') {
+    if (tipo === 'piel') {
+      this.tipoDetectadoPiel = this.calcularTipoPiel(this.respuestasPiel);
+      this.mostrarTestPiel = false;
+      if (this.usuarioId) {
+        this.usuarioService.guardarTestPiel(this.usuarioId, this.tipoDetectadoPiel);
+      }
+    } else if (tipo === 'pelo') {
+      this.tipoDetectadoPelo = this.calcularTipoPelo(this.respuestasPelo);
+      this.mostrarTestPelo = false;
+      if (this.usuarioId) {
+        this.usuarioService.guardarTestPelo(this.usuarioId, this.tipoDetectadoPelo);
+      }
     }
+  }
+  
+  
+  reiniciarTest(tipo: 'piel' | 'pelo') {
+    if (tipo === 'piel') {
+      this.tipoDetectadoPiel = null;
+      this.respuestasPiel = Array(this.preguntasPiel.length).fill('');
+    } else if (tipo === 'pelo') {
+      this.tipoDetectadoPelo = null;
+      this.respuestasPelo = Array(this.preguntasPelo.length).fill('');
+    }
+  }
+  
+
+  private calcularTipoPelo(respuestasPelo: string[]) {
+    const puntuaciones = {
+      normal: 0,
+      seco: 0,
+      graso: 0,
+      mixto: 0
+    };
+
+    // Pregunta 1
+    switch (respuestasPelo[0]) {
+      case 'A las pocas horas de lavarlo': puntuaciones.graso += 3; break;
+      case 'Al día siguiente de lavarlo': puntuaciones.graso += 2; break;
+      case 'Después de 2 o más días': puntuaciones.normal += 2; break;
+      case 'Raramente, casi nunca': puntuaciones.seco += 2; break;
+    }
+
+    // Pregunta 2
+    switch (respuestasPelo[1]) {
+      case 'Muy graso y con picor frecuente': puntuaciones.graso += 2; break;
+      case 'Normal, sin molestias': puntuaciones.normal += 2; break;
+      case 'Muy seco y con descamación': puntuaciones.seco += 3; break;
+      case 'Sensible o con tendencia a irritarse': puntuaciones.seco += 1; break;
+    }
+
+    // Pregunta 3
+    switch (respuestasPelo[2]) {
+      case 'Pegajoso o apelmazado': puntuaciones.graso += 2; break;
+      case 'Suave y manejable': puntuaciones.normal += 2; break;
+      case 'Áspero o quebradizo': puntuaciones.seco += 2; break;
+      case 'Seco en las puntas, pero graso en la raíz': puntuaciones.mixto += 3; break;
+    }
+
+    // Pregunta 4
+    switch (respuestasPelo[3]) {
+      case 'Sí, constantemente': puntuaciones.seco += 2; break;
+      case 'Ocasionalmente': puntuaciones.mixto += 1; break;
+      case 'Muy raramente': puntuaciones.normal += 2; break;
+      case 'Solo cuando lo maltrato mucho': puntuaciones.normal += 1; break;
+    }
+
+    // Pregunta 5
+    switch (respuestasPelo[4]) {
+      case 'Se vuelve muy graso': puntuaciones.graso += 2; break;
+      case 'No cambia mucho': puntuaciones.normal += 1; break;
+      case 'Se reseca fácilmente': puntuaciones.seco += 2; break;
+      case 'Se encrespa o se vuelve opaco': puntuaciones.mixto += 1; break;
+    }
+
+    let puntuacionMax = Math.max(...Object.values(puntuaciones)); //valor + alto de puntuaciones
+    let tipos = Object.entries(puntuaciones) //clave, valor
+      .filter(([_, score]) => score === puntuacionMax) //conserva solo la puntuación + alta
+      .map(([tipo]) => tipo); //extrae solo los tipos
+
+    // priorizar si hay empate
+    if (tipos.length > 1) {
+      if (tipos.includes('mixto')) return 'mixto';
+      if (tipos.includes('graso')) return 'graso';
+      if (tipos.includes('seco')) return 'seco';
+    }
+
+    return tipos[0];
   }
 
   private calcularTipoPiel(respuestas: string[]): string {
-    const scores = {
+    const puntuacionesPiel = {
       normal: 0,
       seca: 0,
       grasa: 0,
@@ -69,63 +175,61 @@ export class InfoPersonalComponent {
       sensible: 0
     };
 
-    // Pregunta 1: ¿Cómo sientes tu piel después de lavarla?
+    // pregunta 1
     switch (respuestas[0]) {
-      case 'Tensa': scores.seca += 2; break;
-      case 'Grasa': scores.grasa += 2; break;
-      case 'Normal': scores.normal += 2; break;
-      case 'Sensible': scores.sensible += 2; break;
+      case 'Tensa': puntuacionesPiel.seca += 2; break;
+      case 'Grasa': puntuacionesPiel.grasa += 2; break;
+      case 'Normal': puntuacionesPiel.normal += 2; break;
+      case 'Sensible': puntuacionesPiel.sensible += 2; break;
     }
 
-    // Pregunta 2: ¿Con qué frecuencia ves brillos?
+    // pregunta 2
     switch (respuestas[1]) {
-      case 'Siempre': scores.grasa += 3; break;
-      case 'A veces': scores.mixta += 2; break;
-      case 'Nunca': scores.seca += 2; break;
-      case 'Solo en zonas específicas': scores.mixta += 3; break;
+      case 'Siempre': puntuacionesPiel.grasa += 3; break;
+      case 'A veces': puntuacionesPiel.mixta += 2; break;
+      case 'Nunca': puntuacionesPiel.seca += 2; break;
+      case 'Solo en zonas específicas': puntuacionesPiel.mixta += 3; break;
     }
 
-    // Pregunta 3: ¿Tu piel se descama o enrojece con facilidad?
+    // pregunta 3
     switch (respuestas[2]) {
       case 'Sí':
-        scores.seca += 1;
-        scores.sensible += 2;
+        puntuacionesPiel.seca += 1;
+        puntuacionesPiel.sensible += 2;
         break;
       case 'No':
-        scores.normal += 1;
-        scores.grasa += 1;
+        puntuacionesPiel.normal += 1;
+        puntuacionesPiel.grasa += 1;
         break;
     }
 
-    // Pregunta 4: ¿Qué textura tiene tu piel al tacto?
+    // pregunta 4
     switch (respuestas[3]) {
-      case 'Suave': scores.normal += 2; break;
-      case 'Gruesa': scores.grasa += 2; break;
+      case 'Suave': puntuacionesPiel.normal += 2; break;
+      case 'Gruesa': puntuacionesPiel.grasa += 2; break;
       case 'Irregular':
-        scores.mixta += 1;
-        scores.sensible += 1;
+        puntuacionesPiel.mixta += 1;
+        puntuacionesPiel.sensible += 1;
         break;
     }
 
-    // Pregunta 5: ¿Tienes zonas con acné o espinillas?
+    // pregunta 5
     switch (respuestas[4]) {
       case 'Sí':
-        scores.grasa += 2;
-        scores.mixta += 1;
+        puntuacionesPiel.grasa += 2;
+        puntuacionesPiel.mixta += 1;
         break;
       case 'No':
-        scores.normal += 1;
-        scores.seca += 1;
+        puntuacionesPiel.normal += 1;
+        puntuacionesPiel.seca += 1;
         break;
     }
 
-    // Determinar el tipo con mayor puntuación
-    let maxScore = Math.max(...Object.values(scores));
-    let tipos = Object.entries(scores)
-      .filter(([_, score]) => score === maxScore)
+    let maxPuntuacion = Math.max(...Object.values(puntuacionesPiel));
+    let tipos = Object.entries(puntuacionesPiel)
+      .filter(([_, score]) => score === maxPuntuacion)
       .map(([tipo]) => tipo);
 
-    // Priorizar en caso de empate
     if (tipos.length > 1) {
       if (tipos.includes('sensible')) return 'sensible';
       if (tipos.includes('mixta')) return 'mixta';
@@ -134,10 +238,6 @@ export class InfoPersonalComponent {
 
     return tipos[0];
   }
-
-  volverAHacerTest() {
-    this.mostrarTest = true;       // Mostrar el test nuevamente
-    this.tipoDetectado = null;     // Resetear el resultado
-    this.respuestasPiel.fill('');  // Limpiar respuestas anteriores
-  }
 }
+
+

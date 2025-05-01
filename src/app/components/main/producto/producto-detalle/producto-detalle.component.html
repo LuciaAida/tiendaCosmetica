@@ -19,24 +19,35 @@
       <textarea [readonly]="!esAdmin" formControlName="descripcion"></textarea>
     </div>
 
-    <div class="contenedor-modal" >
-      <button *ngIf="!isEditing && esAdmin" type="button" class="editar-boton" (click)="habilitarEdicion()">Editar</button>
-      <button type="button" class="cesta-boton" (click)="anyadirACesta(producto)" >
-        Añadir a la cesta
-      <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" class="carro-compra" alt="Carrito de compra" >
-      </button>
+    <button type="button" class="cesta-boton" (click)="anyadirACesta(producto)">
+      Añadir a la cesta
+      <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" class="carro-compra" alt="Carrito de compra">
+    </button>
+
+    <div class="modal" *ngIf="mostrarModal">
+      <div class="modal-contenido">
+        <p>{{ modalMensaje }}</p>
+
+        <ng-container *ngIf="mostrarModal">
+          <button class="detalle-editar" (click)="cerrarModal(false)">Cancelar</button>
+          <button class="detalle-editar" (click)="cerrarModal(true)">
+            Crear cuenta
+          </button>
+        </ng-container>
+
+        <div class="modal" *ngIf="modalTipo === 'confirmLogin'">
+          <div class="modal-contenido">
+            <p>{{ modalMensajeCarrito }}</p>
+            <button class="detalle-editar" (click)="navigateTo('crearCuenta')">Aceptar</button>
+          </div>
+        </div>
+      </div>
     </div>
+
 
     <div class="contenedor-modal" *ngIf="isEditing">
       <button class="volver-boton" (click)="navigateTo('lista')">Volver a la lista</button>
       <button type="submit" class="editar-boton">Guardar cambios</button>
     </div>
   </form>
-</div>
-
-<div class="modal" *ngIf="mostrarModal">
-  <div class="modal-contenido">
-    <p>{{ modalMensaje }}</p>
-    <button class="detalle-editar" (click)="cerrarModal()">Aceptar</button>
-  </div>
 </div>

@@ -1,27 +1,61 @@
 <div class="infoPers">
-    <h2>Test para saber tu tipo de piel</h2>
-
-    <button *ngIf="!mostrarTest && !tipoDetectado" (click)="mostrarTest = true">
-        Iniciar Test
-    </button>
-
-    <div *ngIf="mostrarTest">
+    <!-- --------------------------PIEL----------------------------- -->
+    <div class="test-card piel">
+      <h2>Test para saber tu tipo de piel</h2>
+      <button *ngIf="!mostrarTestPiel && !tipoDetectadoPiel" (click)="mostrarTestPiel = true" class="btn-iniciar">
+        <i class="fa fa-sun-o"></i> Iniciar Test
+      </button>
+  
+      <div *ngIf="mostrarTestPiel" class="test-body">
         <div *ngFor="let p of preguntasPiel; let i = index" class="pregunta">
-            <p>{{ p.texto }}</p>
-            <select [(ngModel)]="respuestasPiel[i]">
-                <option value="" disabled>Selecciona una opción</option>
-                <option *ngFor="let op of p.opciones" [value]="op">{{ op }}</option>
-            </select>
+          <p>{{ p.texto }}</p>
+          <select [(ngModel)]="respuestasPiel[i]">
+            <option value="" disabled>Selecciona una opción</option>
+            <option *ngFor="let op of p.opciones" [value]="op">{{ op }}</option>
+          </select>
         </div>
-        <button (click)="guardarResultado()" [disabled]="respuestasPiel.includes('')">
-            Ver resultado
-        </button>
-    </div>
-
-    <div *ngIf="tipoDetectado">
-        <h3>Tu tipo de piel detectado es: {{ tipoDetectado | titlecase }}</h3>
-        <p>{{ descripcionesTiposPiel[tipoDetectado] }}</p>
-        <button (click)="volverAHacerTest()" class="btn btn-primary">
-          Realizar test nuevamente
+        <button (click)="guardarResultado('piel')" [disabled]="respuestasPiel.includes('')" class="btn-ver">
+          Ver resultado
         </button>
       </div>
+  
+      <div *ngIf="tipoDetectadoPiel" class="test-result">
+        <h3><i class="fa fa-heart"></i> Tu tipo de piel: {{ tipoDetectadoPiel | titlecase }}</h3>
+        <p>{{ descripcionesTiposPiel[tipoDetectadoPiel] }}</p>
+        <button (click)="reiniciarTest('piel')" class="btn-reiniciar">
+          Realizar de nuevo
+        </button>
+      </div>
+    </div>
+  
+    <hr class="divider">
+  
+    <!-- --------------------------PELO----------------------------- -->
+    <div class="test-card pelo">
+      <h2>Test para saber tu tipo de pelo</h2>
+      <button *ngIf="!mostrarTestPelo && !tipoDetectadoPelo" (click)="mostrarTestPelo = true" class="btn-iniciar">
+        <i class="fa fa-scissors"></i> Iniciar Test
+      </button>
+  
+      <div *ngIf="mostrarTestPelo" class="test-body">
+        <div *ngFor="let p of preguntasPelo; let i = index" class="pregunta">
+          <p>{{ p.texto }}</p>
+          <select [(ngModel)]="respuestasPelo[i]">
+            <option value="" disabled>Selecciona una opción</option>
+            <option *ngFor="let op of p.opciones" [value]="op">{{ op }}</option>
+          </select>
+        </div>
+        <button (click)="guardarResultado('pelo')" [disabled]="respuestasPelo.includes('')" class="btn-ver">
+          Ver resultado
+        </button>
+      </div>
+  
+      <div *ngIf="tipoDetectadoPelo" class="test-result">
+        <h3><i class="fa fa-leaf"></i> Tu tipo de pelo: {{ tipoDetectadoPelo | titlecase }}</h3>
+        <p>{{ descripcionesTiposPelo[tipoDetectadoPelo] }}</p>
+        <button (click)="reiniciarTest('pelo')" class="btn-reiniciar">
+          Realizar de nuevo
+        </button>
+      </div>
+    </div>
+  </div>

@@ -21,6 +21,9 @@ export class ProductoDetalleComponent implements OnInit{
   isEditing: boolean = false;
   mostrarModal: boolean = false;
   modalMensaje: string = '¿Estás seguro de guardar los cambios?';
+  estaAutenticado = false;
+  modalMensajeCarrito = '';
+  modalTipo: 'confirmLogin' = 'confirmLogin';
 
   constructor(
     private authService: AuthService,
@@ -34,6 +37,10 @@ export class ProductoDetalleComponent implements OnInit{
     this.authService.esAdmin$.subscribe(isAdmin => {
       this.esAdmin = isAdmin;
     });
+
+    this.authService.estaAutenticado.subscribe(valor =>{
+      this.estaAutenticado = valor;
+    })
 
     const productoId = this.route.snapshot.paramMap.get('id');
     if (productoId) {
@@ -63,7 +70,11 @@ export class ProductoDetalleComponent implements OnInit{
     }
   }
 
-  cerrarModal(): void {
+  cerrarModal(confirm = false): void {
+    this.mostrarModal = false;
+    if (confirm && this.modalTipo === 'confirmLogin') {
+      this.router.navigate(['/crearCuenta']); 
+    }
     if (this.producto && this.formProducto.valid) {
       const datosActualizados = {
         id: this.producto.id,
@@ -87,10 +98,13 @@ export class ProductoDetalleComponent implements OnInit{
   }
 
   anyadirACesta(producto: any) {
-    if (!producto) {
-      console.error('Producto no definido');
+    if (!this.estaAutenticado) {
+      this.modalTipo = 'confirmLogin';
+      this.modalMensajeCarrito = 'Para añadir productos, debes iniciar sesión.';
+      this.mostrarModal = true;
       return;
     }
+
     let cesta: any[] = JSON.parse(localStorage.getItem('cesta') || '[]');
   
     const indice = cesta.findIndex(p => p.id === producto.id);
@@ -101,7 +115,6 @@ export class ProductoDetalleComponent implements OnInit{
     }
   
     localStorage.setItem('cesta', JSON.stringify(cesta));
-  
     this.router.navigate(['cestaComp']);
   }
   
@@ -110,3 +123,4 @@ export class ProductoDetalleComponent implements OnInit{
     this.router.navigate([route]);
   }
 }
+

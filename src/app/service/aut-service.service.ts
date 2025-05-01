@@ -32,7 +32,8 @@ export class AuthService {
 
       const uid = userCredential.user.uid; //obtener id del usuario
       this.setAdmin(uid);
-      this.usuarioService.loadTestPiel(uid);
+      this.usuarioService.cargarTestPiel(uid);
+      this.usuarioService.cargarTestPelo(uid);
     });
   }
   
