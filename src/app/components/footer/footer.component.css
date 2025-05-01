@@ -1,23 +1,25 @@
-.footer{
+.footer {
     width: 100%;
     display: flex;
-    background-color: #EFEFEF;
-    justify-content: space-around; /*espacio entre logo y barra de navegacion*/
+    background-color: #FED8D0; /* melocotón suave */
+    justify-content: space-around;
     align-items: center;
     padding: 7px 7px;
     margin-top: 15px;
     text-align: center;
-    border-top: 1px solid #ccc;
-}
-.footer a:hover{
-    background-color: #caebf2;
+    border-top: 1px solid #D8CFF0; /* lavanda pálido */
 }
 
-.contacto{
-    color:black;
+.footer a:hover {
+    background-color: #FADCD9; /* rosa pastel claro */
+}
+
+.contacto {
+    color: #4A3B4C; /* morado grisáceo oscuro */
     text-decoration: none;
 }
 
-.formulario{
+.formulario {
     cursor: pointer;
+    color: #80424C; /* ciruela oscuro para resaltar */
 }

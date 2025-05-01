@@ -1,11 +1,11 @@
 .detalles-producto {
-  background-color: #f9f9f9;
-  padding: 25px; 
+  background-color: #faf4f5; /* Rosado muy suave pero diferenciable del blanco */
+  padding: 25px;
   padding-bottom: 45px;
   border-radius: 12px;
   max-width: 600px;
   margin: 50px auto;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(128, 66, 76, 0.1);
 }
 
 .producto {
@@ -20,20 +20,21 @@
   justify-content: center;
 }
 
+
 .producto-imagen img {
-  width: 40%; 
+  width: 40%;
   border-radius: 10px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 6px rgba(128, 66, 76, 0.1); /* sombra suave ciruela */
 }
 
 .producto-nombre input {
-  font-size: 19px; 
+  font-size: 19px;
   width: 100%;
-  background-color: #f9f9f9;
-  border: none;
-  border-bottom: 1px solid #474747;
-  color: #333;
-  padding: 8px; 
+  border: 1px solid #C6A4A4; 
+  background-color: #FDEFF0;
+  color: #4A3B4C;
+  padding: 8px;
+  border-radius: 8px;
   margin-top: 10px;
   text-align: center;
 }
@@ -45,41 +46,39 @@
 
 .elemento-detalles label {
   font-weight: bold;
-  color: #474747;
-  margin-bottom: 8px; 
+  color: #4A3B4C;
+  margin-bottom: 8px;
   display: block;
-  font-size: 15px; 
+  font-size: 15px;
 }
 
 .elemento-detalles input,
 .elemento-detalles select,
 .elemento-detalles textarea {
-  font-size: 15px; 
+  font-size: 15px;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #C6A4A4; /* lavanda pálido */
   border-radius: 8px;
   width: 100%;
   box-sizing: border-box;
-  background-color: #f4f4f4;
-  color: #333;
+  background-color: #FDEFF0; /* rosa pastel claro */
+  color: #4A3B4C;
 }
 
 textarea {
-  height: 130px; 
+  height: 130px;
   resize: none;
 }
 
 .contenedor-modal {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px; 
+  margin-top: 20px;
 }
 
-.volver-boton,
-.editar-boton,
-.cesta-boton {
-  background-color: #585757;
-  color: #fff;
+.editar-boton{
+  background-color: #FED8D0; /* melocotón suave */
+  color: #4A3B4C;
   padding: 10px 20px;
   border: none;
   font-size: 18px;
@@ -90,12 +89,56 @@ textarea {
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
+.contenedor-botones > div:not(.botones-edicion) {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.contenedor-botones > div:not(.botones-edicion) > .editar-boton {
+  margin-left: auto; 
+  flex: 0 1 auto; 
+}
+
+.editar-boton, 
+.cesta-boton {
+  min-width: 180px;
+  padding: 12px 20px;
+  font-size: 16px;
+}
+
+.volver-boton,
+.cesta-boton {
+  background-color: #FED8D0; /* melocotón suave */
+  color: #4A3B4C;
+  padding: 10px 20px;
+  border: none;
+  font-size: 18px;
+  border-radius: 8px;
+  margin-top: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.botones-edicion {
+  display: flex;
+  justify-content: space-between; /* Separa los botones a extremos opuestos */
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* Opcional: si quieres mantener el espacio entre botones */
+.botones-edicion button {
+  margin: 0 5px;
+}
+
 .editar-boton:hover,
 .volver-boton:hover,
 .detalle-editar:hover,
 .cesta-boton:hover {
-  background-color: #808080;
-  transform: scale(1.05);
+  background-color: #F38C80; /* rosa pastel claro */
+  transform: scale(1.02);
 }
 
 .modal {
@@ -105,7 +148,7 @@ textarea {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+  background-color: rgba(74, 59, 76, 0.5); /* morado grisáceo oscuro semitransparente */
   display: flex;
   overflow: auto;
   justify-content: center;
@@ -113,20 +156,20 @@ textarea {
 }
 
 .modal-contenido {
-  background-color: #EFEFEF;
+  background-color: #FFFBFC;
   padding: 20px;
-  border: 1px solid;
+  border: 1px solid #D8CFF0;
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(128, 66, 76, 0.2);
   text-align: center;
   font-size: 25px;
   max-width: 400px;
-  width: 90
+  width: 90%;
 }
 
 .detalle-editar {
-  background-color: #585757;
-  color: #ffffff;
+  background-color: #FED8D0;
+  color: #4A3B4C;
   border: none;
   padding: 10px 20px;
   font-size: 16px;
@@ -137,8 +180,8 @@ textarea {
 }
 
 .detalle-editar:hover {
-  background-color: #808080;
-  transform: scale(1.05); 
+  background-color: #F38C80;
+  transform: scale(1.05);
 }
 
 .carro-compra {

@@ -1,74 +1,75 @@
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f0f0f0;
-  }
-  
-  .crearCuenta {
-    max-width: 650px;
-    margin: 90px auto;
-    padding: 20px;
-    background-color: #EFEFEF;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .formulario-usuario {
-    width: 600px; /* El formulario ocupa todo el ancho */
-    display: flex;
-    font-size: 18px;
-    flex-direction: column;
-  }
-  
-  .formulario-usuario label {
-    font-weight: bold;
-    color: #5f5e5e;
-    margin-bottom: 10px; /* Separación entre la etiqueta y el campo */
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #faf4f5;/* Rosa muy suave */
+}
+
+.crearCuenta {
+  max-width: 650px;
+  margin: 90px auto;
+  padding: 20px;
+  background-color: #faf4f5; /* Rosado muy suave */
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(128, 66, 76, 0.1); /* sombra suave */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.formulario-usuario {
+  width: 600px;
+  display: flex;
+  font-size: 18px;
+  flex-direction: column;
+}
+
+.formulario-usuario label {
+  font-weight: bold;
+  color: #4A3B4C; /* morado grisáceo */
+  margin-bottom: 10px;
+}
 
 .formulario-usuario input,
 .formulario-usuario select,
 .formulario-usuario textarea {
-  width: 100%; /* Campos ocupan todo el ancho disponible */
+  width: 100%;
   padding: 10px;
-  margin-bottom: 20px; /* Espaciado consistente entre campos */
+  margin-bottom: 20px;
   font-size: 16px;
-  border: 1px solid #474747;
+  border: 1px solid #C6A4A4; /* lavanda pálido */
   border-radius: 5px;
   box-sizing: border-box;
-  background-color: #EFEFEF; /* Fondo claro para los campos */
+  background-color: #FDEFF0; /* rosa pastel claro */
+  color: #4A3B4C;
 }
 
-.condiciones{
-  gap: 4px; 
+.condiciones {
+  gap: 4px;
   white-space: nowrap;
   display: flex;
   margin: auto;
 }
 
 .enviar {
-    display: block;
-    margin: 0 auto; /* Centra el botón horizontalmente */
-    background-color: #585757;
-    color: #ffffff;
-    border: none;
-    padding: 10px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    text-align: center;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    width: 200px;
+  display: block;
+  margin: 0 auto;
+  background-color: #F8AFA6; 
+  color: #4A3B4C;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  width: 200px;
 }
 
 .enviar:hover {
-    background-color: #808080;
-    transform: scale(1.02);
+  background-color: #F38C80;
+  transform: scale(1.02);
 }
 
 /*------------------------------MODAL-------------------------*/
@@ -79,7 +80,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+  background-color: rgba(74, 59, 76, 0.5); /* morado grisáceo oscuro semitransparente */
   display: flex;
   overflow: auto;
   justify-content: center;
@@ -87,11 +88,11 @@ body {
 }
 
 .modal-contenido {
-  background-color: #EFEFEF;
+  background-color: #FFFBFC;
   padding: 20px;
-  border: 1px solid;
+  border: 1px solid #D8CFF0; /* lavanda pálido */
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(128, 66, 76, 0.2);
   text-align: center;
   font-size: 25px;
   max-width: 400px;
@@ -99,8 +100,9 @@ body {
 }
 
 .opciones {
-  background-color: #585757;
-  color: #ffffff;
+  border: 1px solid #C6A4A4;
+  background-color: #F8AFA6; 
+  color: #4A3B4C;
   border: none;
   padding: 10px 20px;
   font-size: 16px;
@@ -111,14 +113,14 @@ body {
 }
 
 .opciones:hover {
-  background-color: #808080;
+  background-color: #F38C80;
   transform: scale(1.05);
 }
 
 /*--------------------------LOGIN----------------*/
 .login {
-  margin-top: 30px; 
-  padding-top: 20px; 
+  margin-top: 30px;
+  padding-top: 20px;
   font-size: 16px;
   text-align: center;
   font-size: 18px;
@@ -129,9 +131,7 @@ body {
   content: "";
   width: 100%;
   height: 1px;
-  background-color: #808080; 
   position: absolute;
   top: 0;
   left: 0;
 }
-

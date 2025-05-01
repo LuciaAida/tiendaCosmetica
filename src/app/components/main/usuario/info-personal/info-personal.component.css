@@ -6,19 +6,20 @@
 }
 
 .test-card {
-  background: #fff;
+  background: #FFFBFC; /* fondo rosado muy suave */
   border-radius: 12px;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 12px rgba(128, 66, 76, 0.1); /* sombra suave ciruela */
   margin-bottom: 40px;
   overflow: hidden;
   transition: transform 0.3s ease;
 }
+
 .test-card:hover {
   transform: translateY(-4px);
 }
 
 .test-card h2 {
-  background: #585757;
+  background: #80424C; /* ciruela oscuro */
   color: #fff;
   margin: 0;
   padding: 16px;
@@ -28,8 +29,15 @@
   gap: 8px;
 }
 
-.piel h2    { background: #f4e1d2; color: #333; }
-.pelo h2    { background: #cce7f8; color: #333; }
+.piel h2 {
+  background: #F4DAD4; /* tono melocotón rosado */
+  color: #4A3B4C;
+}
+
+.pelo h2 {
+  background: #E2F0FB; /* celeste pastel más suave */
+  color: #4A3B4C;
+}
 
 .test-body {
   padding: 20px;
@@ -38,7 +46,7 @@
 .divider {
   border: none;
   height: 2px;
-  background: #ddd;
+  background: #EADAE2; /* línea lavanda clara */
   margin: -20px 0 40px;
 }
 
@@ -49,15 +57,17 @@
 .pregunta p {
   font-weight: 600;
   margin-bottom: 8px;
-  color: #555;
+  color: #4A3B4C; /* morado grisáceo */
 }
 
 .pregunta select {
   width: 100%;
   padding: 10px;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  border: 1px solid #C6A4A4; /* borde rosado suave */
+  background-color: #FDEFF0; /* fondo rosado pastel */
   font-size: 1rem;
+  color: #4A3B4C;
 }
 
 .btn-iniciar,
@@ -74,36 +84,36 @@
 }
 
 .btn-iniciar {
-  background: #007bff;
-  color: #fff;
+  background: #F8AFA6; /* rosa coral suave */
+  color: #4A3B4C;
   margin: 20px;
   padding: 12px 24px;
 }
 
 .btn-iniciar:hover {
-  background: #0056b3;
+  background: #F38C80; /* tono más fuerte */
   transform: scale(1.03);
 }
 
 .btn-ver {
-  background: #28a745;
-  color: #fff;
+  background: #B1E5B1; /* verde pastel */
+  color: #4A3B4C;
   padding: 10px 20px;
 }
 
 .btn-ver:hover {
-  background: #1e7e34;
+  background: #b3e9b3;
 }
 
 .btn-reiniciar {
-  background: #ffc107;
-  color: #333;
+  background: #FFE0A3; /* amarillo pastel */
+  color: #4A3B4C;
   padding: 8px 16px;
   margin-top: 16px;
 }
 
 .btn-reiniciar:hover {
-  background: #e0a800;
+  background: #FFD27A;
 }
 
 .test-result {
@@ -116,17 +126,17 @@
   gap: 8px;
   font-size: 1.2rem;
   margin-top: 20px;
+  color: #4A3B4C;
 }
 
 .test-result p {
   margin-top: 8px;
   line-height: 1.4;
-  color: #444;
+  color: #4A3B4C;
 }
 
 .btn-ver[disabled] {
   opacity: 0.6;
   cursor: not-allowed;
-  transform: none !important; /* anula el hover-scale */
+  transform: none !important;
 }
-

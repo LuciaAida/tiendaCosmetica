@@ -1,6 +1,9 @@
 <div class="cesta-container">
   <div *ngIf="cesta.length === 0" class="cesta-vacia">
-    <p>Tu cesta está vacía</p>
+    <div class="cesta-vacia-container">
+      <h2 class="cesta-vacia">Tu carrito está vacío</h2>
+      <p class="mensaje-cesta">¡Pero aún estás a tiempo de llenarlo con cosas lindas! 💖</p>
+    </div>    
   </div>
 
   <div *ngFor="let item of cesta" class="producto-cesta">

@@ -19,35 +19,47 @@
       <textarea [readonly]="!esAdmin" formControlName="descripcion"></textarea>
     </div>
 
-    <button type="button" class="cesta-boton" (click)="anyadirACesta(producto)">
-      Añadir a la cesta
-      <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" class="carro-compra" alt="Carrito de compra">
-    </button>
+    <!-- cesta y editar(modales) -->
+    <!-- Contenedor principal de botones -->
+    <div class="contenedor-botones">
+      <div *ngIf="!isEditing">
+        <button type="button" class="cesta-boton" (click)="anyadirACesta(producto)">
+          Añadir a la cesta
+          <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" class="carro-compra"
+            alt="Carrito de compra">
+        </button>
+        <button *ngIf="esAdmin" type="button" class="editar-boton" (click)="habilitarEdicion()">
+          Editar
+        </button>
+      </div>
 
-    <div class="modal" *ngIf="mostrarModal">
-      <div class="modal-contenido">
-        <p>{{ modalMensaje }}</p>
-
-        <ng-container *ngIf="mostrarModal">
-          <button class="detalle-editar" (click)="cerrarModal(false)">Cancelar</button>
-          <button class="detalle-editar" (click)="cerrarModal(true)">
-            Crear cuenta
-          </button>
-        </ng-container>
-
-        <div class="modal" *ngIf="modalTipo === 'confirmLogin'">
-          <div class="modal-contenido">
-            <p>{{ modalMensajeCarrito }}</p>
-            <button class="detalle-editar" (click)="navigateTo('crearCuenta')">Aceptar</button>
-          </div>
-        </div>
+      <div *ngIf="isEditing" class="botones-edicion">
+        <button type="button" class="volver-boton" (click)="cancelarEdicion()">
+          Cancelar
+        </button>
+        <button type="submit" class="editar-boton">
+          Guardar cambios
+        </button>
       </div>
     </div>
 
+    <!-- Modificar el modal -->
+    <div class="modal" *ngIf="mostrarModal">
+      <div class="modal-contenido">
+        <!-- Modal de edición -->
+        <ng-container *ngIf="modalTipo === 'edicion'">
+          <p>{{ modalMensaje }}</p>
+          <button class="detalle-editar" (click)="cerrarModal(false)">Cancelar</button>
+          <button class="detalle-editar" (click)="cerrarModal(true)">Confirmar</button>
+        </ng-container>
 
-    <div class="contenedor-modal" *ngIf="isEditing">
-      <button class="volver-boton" (click)="navigateTo('lista')">Volver a la lista</button>
-      <button type="submit" class="editar-boton">Guardar cambios</button>
+        <!-- Modal de confirmación de inicio de sesión -->
+        <ng-container *ngIf="modalTipo === 'confirmLogin'">
+          <p>{{ modalMensajeCarrito }}</p>
+          <button class="detalle-editar" (click)="cerrarModal(false)">Cancelar</button>
+          <button class="detalle-editar" (click)="navigateTo('crearCuenta')">Crear cuenta</button>
+        </ng-container>
+      </div>
     </div>
   </form>
 </div>

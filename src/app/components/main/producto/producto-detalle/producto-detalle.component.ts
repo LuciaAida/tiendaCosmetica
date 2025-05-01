@@ -23,7 +23,7 @@ export class ProductoDetalleComponent implements OnInit{
   modalMensaje: string = '¿Estás seguro de guardar los cambios?';
   estaAutenticado = false;
   modalMensajeCarrito = '';
-  modalTipo: 'confirmLogin' = 'confirmLogin';
+  modalTipo: 'confirmLogin' |'edicion' = 'confirmLogin';
 
   constructor(
     private authService: AuthService,
@@ -64,17 +64,19 @@ export class ProductoDetalleComponent implements OnInit{
     this.isEditing = true;
   }
 
-  enviar(): void {
-    if (this.isEditing) {
-      this.mostrarModal = true;
-    }
+ // Cambiar el tipo de modal dependiendo de la acción
+enviar(): void {
+  if (this.isEditing) {
+    this.modalTipo = 'edicion';  // Mostrar el modal de confirmación de edición
+    this.mostrarModal = true;
   }
+}
 
-  cerrarModal(confirm = false): void {
-    this.mostrarModal = false;
-    if (confirm && this.modalTipo === 'confirmLogin') {
-      this.router.navigate(['/crearCuenta']); 
-    }
+cerrarModal(confirm = false): void {
+  this.mostrarModal = false;
+  
+  // Comportamiento según el tipo de modal
+  if (this.modalTipo === 'edicion' && confirm) {
     if (this.producto && this.formProducto.valid) {
       const datosActualizados = {
         id: this.producto.id,
@@ -85,22 +87,32 @@ export class ProductoDetalleComponent implements OnInit{
         descripcion: this.formProducto.value.descripcion,
         precio: this.formProducto.value.precio
       };
-      if (!this.producto?.id) {
-        console.error('No se puede actualizar: el producto no tiene ID');
-        return;
-      }
 
-      this.productoService.actualizarProducto(this.producto.id, datosActualizados);
+      this.productoService.actualizarProducto(this.producto.id!, datosActualizados);
+      this.router.navigate(['/productos/lista']);
     }
+  }
+  
+  // Si el tipo de modal es confirmLogin
+  if (this.modalTipo === 'confirmLogin' && confirm) {
+    this.router.navigate(['/crearCuenta']); 
+  }
+}
 
-    this.mostrarModal = false;
-    this.router.navigate(['/productos/lista']);
+
+  cancelarEdicion(): void {
+    this.isEditing = false;
+    this.formProducto.patchValue({
+      nombre: this.producto.nombre,
+      precio: this.producto.precio,
+      descripcion: this.producto.descripcion
+    });
   }
 
   anyadirACesta(producto: any) {
     if (!this.estaAutenticado) {
       this.modalTipo = 'confirmLogin';
-      this.modalMensajeCarrito = 'Para añadir productos, debes iniciar sesión.';
+      this.modalMensajeCarrito = 'Por favor, inicia sesión para continuar con tu compra';
       this.mostrarModal = true;
       return;
     }

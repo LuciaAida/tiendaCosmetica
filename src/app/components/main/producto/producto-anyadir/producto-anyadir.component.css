@@ -3,16 +3,16 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f0f0f0;
+    background-color: #faf4f5; /* fondo blanco rosado */
 }
 
 .añadir-producto {
     max-width: 650px;
     margin: 50px auto;
     padding: 20px;
-    background-color: #EFEFEF;
+    background-color: #faf4f5; /* rosa pastel claro */
     border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(128, 66, 76, 0.2); /* ciruela oscuro */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -27,7 +27,7 @@ body {
 
 .formulario-producto label {
     font-weight: bold;
-    color: #5f5e5e;
+    color: #4A3B4C; /* morado grisáceo oscuro */
     margin-bottom: 10px;
 }
 
@@ -38,23 +38,23 @@ body {
     padding: 10px;
     margin-bottom: 20px;
     font-size: 16px;
-    border: 1px solid #474747;
+    border: 1px solid #C6A4A4; /* lavanda pálido */
     border-radius: 5px;
     box-sizing: border-box;
-    background-color: #EFEFEF;
+    background-color: #FDEFF0; /* blanco rosado */
 }
 
-.formulario-producto textarea{
+.formulario-producto textarea {
     height: 150px;
-    resize: none; /* prohibe cambiar el tamaño*/
-    overflow-y: auto; /* barra de desplazamiento*/
+    resize: none;
+    overflow-y: auto;
 }
 
 .enviar {
     display: block;
     margin: 0 auto;
-    background-color: #585757;
-    color: #ffffff;
+    background-color: #F8AFA6; 
+    color: #4A3B4C;
     border: none;
     padding: 10px;
     font-size: 16px;
@@ -66,7 +66,7 @@ body {
 }
 
 .enviar:hover {
-    background-color: #808080;
+    background-color: #F38C80;
     transform: scale(1.02);
 }
 
@@ -78,28 +78,28 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    background-color: rgba(74, 59, 76, 0.5); /* morado grisáceo oscuro semitransparente */
     display: flex;
     overflow: auto;
     justify-content: center;
     align-items: center;
-  }
-  
-  .modal-contenido {
-    background-color: #EFEFEF;
+}
+
+.modal-contenido {
+    background-color: #FFFBFC; /* blanco rosado */
     padding: 20px;
-    border: 1px solid;
+    border: 1px solid #D8CFF0; /* lavanda pálido */
     border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(128, 66, 76, 0.2); /* sombra ciruela */
     text-align: center;
     font-size: 25px;
     max-width: 400px;
     width: 90%;
-  }
-  
-  .opciones {
-    background-color: #585757;
-    color: #ffffff;
+}
+
+.opciones {
+    background-color: #FED8D0; /* melocotón suave */
+    color: #4A3B4C;
     border: none;
     padding: 10px 20px;
     font-size: 16px;
@@ -107,10 +107,9 @@ body {
     border-radius: 5px;
     margin: 10px;
     transition: background-color 0.3s ease, transform 0.3s ease;
-  }
-  
-  .opciones:hover {
-    background-color: #808080;
+}
+
+.opciones:hover {
+    background-color: #F38C80;
     transform: scale(1.05);
-  }
-  
+}

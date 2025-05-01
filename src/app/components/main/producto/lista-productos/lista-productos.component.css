@@ -1,8 +1,8 @@
 .agregar {
   display: block;
   margin: 0 auto;
-  background-color: #585757;
-  color: #ffffff;
+  background-color: #FED8D0; /* melocotón suave */
+  color: #4A3B4C; /* morado grisáceo oscuro */
   border: none;
   padding: 10px;
   font-size: 16px;
@@ -15,7 +15,7 @@
 }
 
 .agregar:hover {
-  background-color: #808080;
+  background-color: #F38C80;
   transform: scale(1.02);
 }
 
@@ -30,12 +30,12 @@
 }
 
 .carta-producto {
-  background-color: #EFEFEF;
+  background-color: #FFFBFC; /* fondo blanco rosado */
   border-radius: 12px;
   padding: 25px;
   text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  height: 400px; 
+  box-shadow: 0 4px 8px rgba(128, 66, 76, 0.2); /* sombra en tono ciruela */
+  height: 400px;
   width: 250px;
   display: flex;
   overflow: hidden;
@@ -45,7 +45,7 @@
 
 .carta-producto img {
   max-width: 100%;
-  max-height: 150px; 
+  max-height: 150px;
   object-fit: cover;
   border-radius: 4px;
   margin: 0 auto;
@@ -53,34 +53,34 @@
 
 .carta-producto h3 {
   margin: 0;
-  color: #2b2b2b;
+  color: #80424C; /* ciruela oscuro */
   font-size: 24px;
   font-weight: 700;
   letter-spacing: 0.5px;
 }
 
 .carta-producto p {
-  font-size: 16px; /* Tamaño normal para la descripción */
-  color: #5f5e5e;
+  font-size: 16px;
+  color: #4A3B4C; /* morado grisáceo oscuro */
   margin: 6px 0;
-  font-weight: normal; /* Sin negrita en la descripción */
+  font-weight: normal;
 }
 
 .carta-producto .precio {
   font-size: 20px;
-  color: #333;
+  color: #80424C; /* ciruela oscuro */
   font-weight: bold;
   margin-bottom: 10px;
 }
 
-.carta-producto:hover{
+.carta-producto:hover {
   transform: scale(1.05);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 8px rgba(128, 66, 76, 0.3); /* sombra más intensa al hover */
 }
 
 .overflow {
-  margin-bottom: 40px;  
-  margin-top: 40px; 
+  margin-bottom: 40px;
+  margin-top: 40px;
   display: flex;
 }
 
@@ -90,10 +90,10 @@
   justify-content: flex-start;
   align-items: center;
   margin-bottom: 15px;
-} 
+}
 
 button {
-  background-color: #e74c3c; 
+  background-color: #80424C; /* ciruela oscuro */
   color: #fff;
   padding: 10px 20px;
   font-size: 16px;
@@ -106,8 +106,8 @@ button {
 }
 
 button:hover {
-  background-color: #c0392b;
-  transform: scale(1.05);
+  background-color: #80444e; /* morado grisáceo oscuro */
+  transform: scale(1.02);
 }
 
 button img {
@@ -124,7 +124,7 @@ button img {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+  background-color: rgba(74, 59, 76, 0.5); /* fondo oscuro morado grisáceo */
   display: flex;
   overflow: auto;
   justify-content: center;
@@ -132,14 +132,14 @@ button img {
 }
 
 .modal-contenido {
-  background-color: #EFEFEF;
+  background-color: #FFFBFC; /* fondo blanco rosado */
   padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid;
+  border: 1px solid #D8CFF0; /* lavanda */
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(128, 66, 76, 0.2);
   text-align: center;
   font-size: 25px;
   max-width: 400px;
@@ -147,8 +147,8 @@ button img {
 }
 
 .opciones {
-  background-color: #585757;
-  color: #ffffff;
+  background-color: #FED8D0; /* melocotón suave */
+  color: #4A3B4C;
   border: none;
   padding: 10px 20px;
   font-size: 16px;
@@ -159,7 +159,6 @@ button img {
 }
 
 .opciones:hover {
-  background-color: #808080;
-  transform: scale(1.05);
+  background-color: #F38C80;
+  transform: scale(1.02);
 }
-

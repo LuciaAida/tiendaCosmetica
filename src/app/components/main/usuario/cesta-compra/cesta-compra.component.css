@@ -1,139 +1,304 @@
-.cesta-container {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
-  }
-  
-  .producto-cesta {
-    display: flex;
-    align-items: center;
-    background-color: #efefef;
-    margin-bottom: 15px;
-    border-radius: 10px;
-    padding: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  }
-  
-  .producto-imagen-cesta {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-right: 15px;
-  }
-  
-  .info-producto {
-    flex-grow: 1;
-  }
-  
-  .cantidad-control {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-  }
-  
-  .cantidad-control button {
-    padding: 5px 10px;
-    font-size: 18px;
-    cursor: pointer;
-  }
-  
-  .eliminar-boton {
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .eliminar-boton img {
-    width: 24px;
-    height: 24px;
-  }
-  
-  .acciones-cesta {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 30px;
-  }
-  
-  .acciones-cesta button {
-    background-color: #585757;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  .acciones-cesta button:hover {
-    background-color: #808080;
-  }
+.detalles-producto {
+  background-color: #FFFBFC; /* Rosado muy suave */
+  padding: 25px;
+  padding-bottom: 45px;
+  border-radius: 12px;
+  max-width: 600px;
+  margin: 50px auto;
+  box-shadow: 0 4px 8px rgba(128, 66, 76, 0.1);
+}
 
-  .cesta-vacia{
-    margin-top: 20px;
-    font-size: 50px;
-    font-weight: bold;
+.producto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.producto-imagen {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.producto-imagen img {
+  width: 40%;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(128, 66, 76, 0.1); /* sombra suave ciruela */
+}
+
+.producto-nombre input {
+  font-size: 19px;
+  width: 100%;
+  background-color: #FFFBFC;
+  border: none;
+  border-bottom: 1px solid #80424C; /* ciruela oscuro */
+  color: #4A3B4C; /* morado grisáceo */
+  padding: 8px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.elemento-detalles {
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.elemento-detalles label {
+  font-weight: bold;
+  color: #4A3B4C;
+  margin-bottom: 8px;
+  display: block;
+  font-size: 15px;
+}
+
+.elemento-detalles input,
+.elemento-detalles select,
+.elemento-detalles textarea {
+  font-size: 15px;
+  padding: 10px;
+  border: 1px solid #D8CFF0; /* lavanda pálido */
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #FADCD9; /* rosa pastel claro */
+  color: #4A3B4C;
+}
+
+textarea {
+  height: 130px;
+  resize: none;
+}
+
+.contenedor-modal {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.editar-boton {
+  background-color: #FED8D0; /* melocotón suave */
+  color: #4A3B4C;
+  padding: 10px 20px;
+  border: none;
+  font-size: 18px;
+  border-radius: 8px;
+  margin-top: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.contenedor-botones > div:not(.botones-edicion) {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+}
+
+.editar-boton,
+.cesta-boton {
+  flex: 1;
+  min-width: 180px;
+  padding: 12px 20px;
+  font-size: 16px;
+}
+
+.volver-boton,
+.cesta-boton {
+  background-color: #FED8D0; /* melocotón suave */
+  color: #4A3B4C;
+  border: none;
+  font-size: 18px;
+  border-radius: 8px;
+  margin-top: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.botones-edicion {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.botones-edicion button {
+  flex: 1;
+  padding: 12px;
+  font-size: 16px;
+}
+
+.editar-boton:hover,
+.volver-boton:hover,
+.detalle-editar:hover,
+.cesta-boton:hover {
+  background-color: #FADCD9; /* rosa pastel claro */
+  transform: scale(1.05);
+}
+
+.modal {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(74, 59, 76, 0.5); /* morado grisáceo oscuro semitransparente */
+  display: flex;
+  overflow: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-contenido {
+  background-color: #FFFBFC;
+  padding: 20px;
+  border: 1px solid #D8CFF0;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(128, 66, 76, 0.2);
+  text-align: center;
+  font-size: 25px;
+  max-width: 400px;
+  width: 90%;
+}
+
+.detalle-editar {
+  background-color: #FED8D0;
+  color: #4A3B4C;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 10px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.detalle-editar:hover {
+  background-color: #FADCD9;
+  transform: scale(1.05);
+}
+
+.carro-compra {
+  width: 20px;
+  height: 20px;
+}
+
+/*----------------------Cesta------------------------------*/
+
+.cesta-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+.producto-cesta {
+  display: flex;
+  align-items: center;
+  background-color: #FFF1F2; /* Rosa muy suave */
+  margin-bottom: 15px;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(128, 66, 76, 0.1);
+}
+
+.producto-imagen-cesta {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 15px;
+}
+
+.info-producto {
+  flex-grow: 1;
+}
+
+.cantidad-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.cantidad-control button {
+  padding: 5px 10px;
+  font-size: 18px;
+  cursor: pointer;
+  background-color: #FED8D0; /* melocotón suave */
+  color: #4A3B4C;
+  border: none;
+  border-radius: 5px;
+}
+
+.eliminar-boton {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.eliminar-boton img {
+  width: 24px;
+  height: 24px;
+}
+
+.acciones-cesta {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.acciones-cesta button {
+  flex: 1;
+  background-color: #F8AFA6; /* rosa coral suave */
+  color: #4A3B4C;
+  border: none;
+  font-size: 16px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.acciones-cesta button:hover{
+  background-color: #F38C80;
+  transform: scale(1.02);
+}
+
+/**-----------------------CESTA-----------------------*/
+.mensaje-cesta {
+  font-size: 20px;
+  color: #7a6b6b;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.cesta-vacia-container {
+  text-align: center;
+  margin-top: 80px;
+  animation: fadeIn 1s ease forwards;
+  opacity: 0;
+}
+
+.cesta-vacia {
+  font-size: 60px;
+  color: #585757;
+  margin-bottom: 20px;
+}
+
+.mensaje-cesta {
+  font-size: 20px;
+  color: #7a6b6b;
+  margin-bottom: 30px;
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-  
-  .total-general {
-    margin-top: 20px;
-    text-align: right;
-    font-size: 22px;
-    font-weight: bold;
+  to {
+    opacity: 1;
   }
-  
-  .total-producto {
-    font-weight: bold;
-    font-size: 18px;
-    color: #333;
-    background-color: #d1d1d1;
-    padding: 6px 10px;
-    border-radius: 6px;
-    display: inline-block;
-    margin-top: 8px;
-  }
-  
-  /*----------------------MODAL------------------------------*/
-  .modal {
-    position: fixed;
-    z-index: 1000;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
-    display: flex;
-    overflow: auto;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .modal-contenido {
-    background-color: #EFEFEF;
-    padding: 20px;
-    border: 1px solid;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    font-size: 25px;
-    max-width: 400px;
-    width: 90
-  }
-  
-  .detalle-editar {
-    background-color: #585757;
-    color: #ffffff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin: 10px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-  }
-  
-  .detalle-editar:hover {
-    background-color: #808080;
-    transform: scale(1.05); 
-  }
+}

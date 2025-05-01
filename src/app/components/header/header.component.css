@@ -1,32 +1,34 @@
 /* los elementos ocupen lo que necesitan no más */
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
-.titulo{
+.titulo {
     font-weight: bold;
-    color: #5f5e5e;
+    color: #4A3B4C; /* morado grisáceo oscuro */
     font-size: 60px;
 }
 
-body{
+body {
     display: flex;
     height: 200px;
-    color: white; /*las letras*/
+    color: white;
     position: fixed;
+    background-color: #FFFBFC; /* fondo blanco rosado */
 }
 
-.navbar{
+.navbar {
     width: 100%;
     display: flex;
-    background-color: #EFEFEF;
-    justify-content: space-around; /*espacio entre logo y barra de navegacion*/
+    background-color: #FED8D0; /* melocotón suave */
+    justify-content: space-around;
     align-items: center;
 }
-.navbar a:hover{
-    background-color: #caebf2;
+
+.navbar a:hover {
+    background-color: #FADCD9; /* rosa pastel claro */
 }
 
 img {
@@ -35,87 +37,110 @@ img {
     height: 40px;
 }
 
-.lista-principal, .lista-secundaria{
+.lista-principal,
+.lista-secundaria {
     list-style: none;
     display: flex;
     align-items: center;
 }
 
-li{
+li {
     list-style: none;
     cursor: pointer;
     padding: 30px;
     transition: .3s ease;
+    color: #4A3B4C; /* texto en morado grisáceo */
 }
-li:hover{
-    background-color: #caebf2;
+
+li:hover {
+    background-color: #FADCD9; /* rosa pastel claro */
 }
 
 /*--------------------------PIEL / CUENTA-------------------------*/
-.cuidadoFacial, .cuenta{
+.cuidadoFacial,
+.cuenta {
     position: relative;
 }
-.tipos-cuidado, .propiedades-cuenta{
-    display: none; /*submenu oculto*/
+
+.tipos-cuidado,
+.propiedades-cuenta {
+    display: none;
     position: absolute;
     list-style: none;
     padding: 10px 0;
     margin-top: 5%;
 }
-.tipos-cuidado li, .propiedades-cuenta li{ 
+
+.tipos-cuidado li,
+.propiedades-cuenta li {
     width: 190px;
     transform: translateX(-20px);
-    border-top: solid 1px #fff;
-    border-bottom: solid 1px #fff;
+    border-top: solid 1px #D8CFF0; /* lavanda pálido */
+    border-bottom: solid 1px #D8CFF0;
     text-align: center;
-    background-color: #EFEFEF;
+    background-color: #FFFBFC; /* fondo blanco rosado */
+    color: #4A3B4C;
 }
-.tipos-cuidado li:hover, .propiedades-cuenta li:hover{
-    background-color:#caebf2 ;
+
+.tipos-cuidado li:hover,
+.propiedades-cuenta li:hover {
+    background-color: #FADCD9; /* rosa pastel claro */
 }
-.cuidadoFacial:hover > .tipos-cuidado, .cuenta:hover > .propiedades-cuenta{
-    display: block; /*para mostrar los tipos*/
+
+.cuidadoFacial:hover > .tipos-cuidado,
+.cuenta:hover > .propiedades-cuenta {
+    display: block;
 }
 
 /*--------------------------PELO-------------------------*/
-.pelo, .peloRizado{
+.pelo,
+.peloRizado {
     position: relative;
 }
 
-.productos-pelo, .productos-peloRizado{
+.productos-pelo,
+.productos-peloRizado {
     display: none;
     padding: 10px 0;
     position: absolute;
     margin-top: 5%;
 }
-.productos-pelo li, .productos-peloRizado li{ 
+
+.productos-pelo li,
+.productos-peloRizado li {
     width: 190px;
     transform: translateX(-20px);
-    border-top: solid 1px #fff;
-    border-bottom: solid 1px #fff;
+    border-top: solid 1px #D8CFF0; /* lavanda pálido */
+    border-bottom: solid 1px #D8CFF0;
     text-align: center;
-    background-color: #EFEFEF;
+    background-color: #FFFBFC; /* fondo blanco rosado */
+    color: #4A3B4C;
 }
 
-.productos-peloRizado li:hover, .productos-pelo li:hover{
-    background-color:#caebf2 ;
+.productos-pelo li:hover,
+.productos-peloRizado li:hover {
+    background-color: #FADCD9; /* rosa pastel claro */
 }
 
-.pelo:hover  > .productos-pelo, .peloRizado:hover > .productos-peloRizado{
+.pelo:hover > .productos-pelo,
+.peloRizado:hover > .productos-peloRizado {
     display: block;
 }
 
-/*para pantalla de movil*/
-@media (max-width : 400) {
-    nav{
+/* para pantalla de móvil */
+@media (max-width: 400px) {
+    nav {
         flex-direction: column;
         gap: 20px;
         padding: 20px;
-    }nav p{
+    }
+
+    nav p {
         font-size: 20px;
         font-weight: 20px;
     }
-    .main-ul{
+
+    .main-ul {
         flex-direction: column;
     }
 }
