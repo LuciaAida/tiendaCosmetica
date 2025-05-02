@@ -1,81 +1,76 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UsuarioService } from '../../../../service/usuario.service';
+import { AuthService } from '../../../../service/aut-service.service';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-cesta-compra',
-  standalone: true,
-  imports: [CommonModule],
   templateUrl: './cesta-compra.component.html',
-  styleUrl: './cesta-compra.component.css'
+  styleUrls: ['./cesta-compra.component.css'],
+  providers: [CurrencyPipe],
+  imports: [CommonModule]
 })
 export class CestaCompraComponent implements OnInit {
   cesta: any[] = [];
+  uid!: string;
   mostrarModal: boolean = false;
   modalMensaje: string = '';
 
   constructor(
+    private usuarioService: UsuarioService,
+    private authService: AuthService,
     private router: Router
   ) { }
 
   ngOnInit() {
-    this.cargarCesta();
+    const uid = this.authService.getUsuarioId()!;
+    this.usuarioService.cargarDatosUsuario(uid);
+    this.usuarioService.cesta$.subscribe(items => this.cesta = items);
   }
-
-  private cargarCesta() {
-    const datos = localStorage.getItem('cesta');
-    this.cesta = datos ? JSON.parse(datos) : [];
-  }
-
+  
   añadirACesta(producto: any) {
-    let cesta: any[] = JSON.parse(localStorage.getItem('cesta') || '[]');
-  
-    const indice = cesta.findIndex(p => p.id === producto.id);
-    if (indice !== -1) {
-      cesta[indice].cantidad += 1;
+    const idx = this.cesta.findIndex(p => p.id === producto.id);
+    if (idx !== -1) {
+      this.cesta[idx].cantidad++;
     } else {
-      cesta.push({ ...producto, cantidad: 1 });
+      this.cesta.push({ ...producto, cantidad: 1 });
     }
-  
-    localStorage.setItem('cesta', JSON.stringify(cesta));
+    this.usuarioService.guardarCesta(this.uid, this.cesta);
   }
-  
+
   sumarCantidad(producto: any) {
     producto.cantidad++;
-    this.actualizarStorage();
+    this.usuarioService.guardarCesta(this.uid, this.cesta);
   }
 
   restarCantidad(producto: any) {
     if (producto.cantidad > 1) {
       producto.cantidad--;
-      this.actualizarStorage();
+      this.usuarioService.guardarCesta(this.uid, this.cesta);
     }
   }
 
   eliminarProducto(producto: any) {
     this.cesta = this.cesta.filter(p => p.id !== producto.id);
-    this.actualizarStorage();
+    this.usuarioService.guardarCesta(this.uid, this.cesta);
   }
 
   calcularTotal(): number {
-    return this.cesta.reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
-  }  
+    return this.cesta.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
+  }
 
-  actualizarStorage() {
-    localStorage.setItem('cesta', JSON.stringify(this.cesta));
-    this.cargarCesta();
+  hacerCompra() {
+    this.cesta = [];
+    this.usuarioService.guardarCesta(this.uid!, []);
+    this.modalMensaje = 'Su compra se ha realizado con éxito';
+    this.mostrarModal = true;
   }
   
   cerrarModal() {
-    this.mostrarModal = false;
-    localStorage.removeItem('cesta');
-    this.cargarCesta(); 
+    this.mostrarModal = false; 
   }
   
-  hacerCompra() {
-    this.mostrarModal = true;
-    this.modalMensaje = 'Su compra se ha realizado con éxito';
-  }
 
   navigateTo(route: string) {
     this.router.navigate([route]);

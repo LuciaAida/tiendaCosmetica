@@ -3,7 +3,7 @@
 <header>
     <nav>
         <div class="navbar">
-            <p class="titulo">Beauty Lu</p>
+            <p class="titulo" (click)="navigateTo('lista')" style="cursor: pointer;">Beauty Lu</p>
             <ul class="lista-principal">
                 <li class="cuidadoFacial">
                     Cuidado facial
@@ -35,11 +35,11 @@
             <li class="cuenta">
                 <img src="https://cdn-icons-png.flaticon.com/512/3276/3276535.png" alt="Icono de la cuenta">
                 <ul class="propiedades-cuenta">
-                    <li (click)="navigateTo('infoPers')">Información personal</li>
-                    <li (click) = "navigateTo('cestaComp')">Mi cesta</li>
+                    <li *ngIf="estaAutenticado" (click)="navigateTo('infoPers')">Información personal</li>
+                    <li *ngIf="estaAutenticado" (click) = "navigateTo('cestaComp')">Mi cesta</li>
                     <li (click)="navigateTo('login')">Iniciar Sesión</li>
                     <li (click)="navigateTo('crearCuenta')">Crear cuenta</li>
-                     <li (click)="cerrarSesion()">Cerrar sesión</li> 
+                     <li *ngIf="estaAutenticado" (click)="cerrarSesion()">Cerrar sesión</li> 
                 </ul>
             </li>
             <div *ngIf="estaAutenticado">

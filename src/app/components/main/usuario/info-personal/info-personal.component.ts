@@ -70,8 +70,7 @@ export class InfoPersonalComponent {
 
   cargarTestUsuario() {
     if (this.usuarioId) {
-      this.usuarioService.cargarTestPiel(this.usuarioId);
-      this.usuarioService.cargarTestPelo(this.usuarioId);
+      this.usuarioService.cargarDatosUsuario(this.usuarioId);
     }
   }
 

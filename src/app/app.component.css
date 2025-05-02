@@ -1,4 +1,15 @@
-.container{
-    width: 100%;
-    padding: 0px;
-}
+html, body {
+    height: 100%;
+    margin: 0;
+  }
+  
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+app-main {
+    flex: 1; /*para que ocupe todo el espacio entre header y footer*/
+  }
+  

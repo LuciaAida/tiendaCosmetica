@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Firestore, doc, getDoc, setDoc } from '@angular/fire/firestore';
+import { Firestore, doc, docData, getDoc, setDoc } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +10,12 @@ export class UsuarioService {
   private admin: boolean = false;
   private testPielSubject = new BehaviorSubject<string | null>(null);
   private testPeloSubject = new BehaviorSubject<string | null>(null);
+
   testPiel$ = this.testPielSubject.asObservable();
   testPelo$ = this.testPeloSubject.asObservable();
+  
+  private cestaSubject = new BehaviorSubject<any[]>([]);
+  cesta$ = this.cestaSubject.asObservable();
 
   constructor(private firestore: Firestore) { }
 
@@ -23,35 +27,32 @@ export class UsuarioService {
     return this.admin;
   }
 
-  //pelo
-  cargarTestPelo(uid: string) {
-    const ref = doc(this.firestore, `usuarios/${uid}`);
-    getDoc(ref).then(snap => {
-      const data = snap.data();
+  cargarDatosUsuario(usuario_id: string) {
+    const ref = doc(this.firestore, `usuarios/${usuario_id}`);
+    docData(ref).subscribe(data => {
+      // Tests
       this.testPeloSubject.next(data?.['testPelo'] ?? null);
-    });
-  }
-
-  guardarTestPelo(uid:string, resultado:string){
-    const ref = doc(this.firestore,  `usuarios/${uid}`);
-    setDoc(ref, { testPelo: resultado }, { merge: true })
-      .then(() => this.testPeloSubject.next(resultado))
-      .catch(error => console.error("Error guardando test:", error));
-  }
-
- //piel
- cargarTestPiel(uid: string) {
-    const ref = doc(this.firestore, `usuarios/${uid}`);
-    getDoc(ref).then(snap => {
-      const data = snap.data();
       this.testPielSubject.next(data?.['testPiel'] ?? null);
+      // Cesta
+      this.cestaSubject.next(data?.['cesta'] ?? []);
     });
   }
 
-  guardarTestPiel(uid: string, resultado: string) {
-    const ref = doc(this.firestore, `usuarios/${uid}`);
-    setDoc(ref, { testPiel: resultado }, { merge: true })
-      .then(() => this.testPielSubject.next(resultado))
-      .catch(error => console.error("Error guardando test:", error));
+  async guardarTestPelo(usuario_id: string, resultado: string) {
+    const ref = doc(this.firestore, `usuarios/${usuario_id}`);
+    await setDoc(ref, { testPelo: resultado }, { merge: true });
+    this.testPeloSubject.next(resultado);
+  }
+
+  async guardarTestPiel(usuario_id: string, resultado: string) {
+    const ref = doc(this.firestore, `usuarios/${usuario_id}`);
+    await setDoc(ref, { testPiel: resultado }, { merge: true });
+    this.testPielSubject.next(resultado);
+  }
+
+  async guardarCesta(usuario_id: string, productos: any[]) {
+    const ref = doc(this.firestore, `usuarios/${usuario_id}`);
+    await setDoc(ref, { cesta: productos }, { merge: true });
+    this.cestaSubject.next(productos);
   }
 }
