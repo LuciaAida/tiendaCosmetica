@@ -1,12 +1,12 @@
 <button class="agregar" *ngIf="esAdmin" (click)="navigateTo('anyadirProd')">Añadir productos</button> 
 
 <div class="overflow">
-  <div class="modal-contenido" *ngIf="productos.length == 0">
+  <div class="modal-contenido" *ngIf="filtrados.length == 0">
     <p>No hay productos disponibles</p>
   </div>
 
-  <div class="producto-grid" *ngIf="productos.length > 0">
-    <div class="carta-producto" *ngFor="let producto of productos; let i = index" 
+  <div class="producto-grid" *ngIf="filtrados.length > 0">
+    <div class="carta-producto" *ngFor="let producto of filtrados; let i = index" 
          (click)="navigateTo('detalle', producto.id!)" style="cursor: pointer;">
       <h3>{{ producto.nombre }}</h3>
       <img [src]="producto.urlImagen" alt="Vista Previa de la Imagen" style="width: 85%; margin: 0 auto; text-align: center;"/>

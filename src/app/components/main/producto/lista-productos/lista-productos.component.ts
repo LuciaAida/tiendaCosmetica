@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { productoModelo } from '../modelo/producto.modelo';
 import { ProductoService } from '../../../../service/producto.service';
 import { AuthService } from '../../../../service/aut-service.service';
+import { Filtro, FiltroService } from '../../../../service/filtro.service';
 
 @Component({
   selector: 'app-lista-productos',
@@ -20,26 +21,39 @@ export class ListaProductosComponent implements OnInit{
   dialog: any;
   mostrarModal: boolean = false;
   modalMensaje: string = '';
+  filtrados: productoModelo[] = [];
   esAdmin: boolean = false;
 
   constructor(
     private ProductoService: ProductoService, 
     private router:Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private filtroService: FiltroService
   ){}
 
   ngOnInit():void{
     this.authService.esAdmin$.subscribe(isAdmin => {
       this.esAdmin = isAdmin;
     });
-    this.ProductoService.getProductos().subscribe(
-      (data: productoModelo[]) => {
-        this.productos = data;
-      },
-      (error:any) => {
-        console.error('Error al cargar productos:', error);
-      }
-    );
+    this.ProductoService.getProductos().subscribe(all => {
+      this.productos = all;
+      this.filtrados = all;              
+    });
+
+    this.filtroService.filtro$.subscribe((f: Filtro) => {
+      this.aplicarFiltro(f);
+    });
+  }
+
+  aplicarFiltro(f: Filtro) {
+    const { tipo, subtipo } = f;
+    if (!tipo) {
+      this.filtrados = this.productos;
+    } else {
+      this.filtrados = this.productos.filter(p =>
+        p.tipo === tipo && (subtipo ? p.subtipo === subtipo : true)
+      );
+    }
   }
 
   acortarDescripcion(description: string, esImagenGrande: boolean, limitPequeno: number = 15, limitGrande: number = 50, minimoLineas: number = 2): string {
@@ -67,15 +81,17 @@ export class ListaProductosComponent implements OnInit{
   eliminarProducto(id: string, index: number) {
     this.ProductoService.eliminarProducto(id)
       .then(() => {
-        this.productos.splice(index, 1);
+        this.productos = this.productos.filter(p => p.id !== id); //eliminar del array original
+        this.filtrados = this.filtrados.filter(p => p.id !== id); //eliminar del array filtrados
         this.modalMensaje = 'Producto eliminado correctamente';
         this.mostrarModal = true;
       })
-      .catch((error) => {
+      .catch(() => {
         this.modalMensaje = 'Error al eliminar el producto';
         this.mostrarModal = true;
       });
   }
+  
 
   cerrarModal(){
     this.mostrarModal = false;

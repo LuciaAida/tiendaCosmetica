@@ -3,6 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/aut-service.service';
 import { Subscription } from 'rxjs';
+import { FiltroService } from '../../service/filtro.service';
 
 
 @Component({
@@ -20,7 +21,8 @@ export class HeaderComponent implements OnInit, OnDestroy{
 
   constructor(
     private router:Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private filtroService: FiltroService
   ){}
   
   ngOnInit():void{
@@ -30,6 +32,19 @@ export class HeaderComponent implements OnInit, OnDestroy{
     this.nombreUsuarioSubscription = this.authService.nombreUsuario$.subscribe(nombre => {
       this.nombreUsuario = nombre;
     });
+  }
+
+  filterBy(tipo: string, subtipo?: string) {
+    this.filtroService.setFiltro(tipo, subtipo);
+  }
+
+  clearFilter() {
+    this.filtroService.setFiltro(null as any, undefined);
+  }
+
+  home() {
+    this.clearFilter();
+    this.router.navigate(['lista']);
   }
 
   navigateTo(route:string){

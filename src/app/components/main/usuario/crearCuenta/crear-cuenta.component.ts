@@ -30,7 +30,6 @@ export class CrearCuentaComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
-    console.log("Crear cuenta inicializado");
     this.form = this.formBuilder.group({
       nombre: ['', [Validators.required]],
       correo: ['', [Validators.required, Validators.email]],

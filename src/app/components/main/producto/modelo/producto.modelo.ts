@@ -5,6 +5,5 @@ export interface productoModelo {
     subtipo: string;
     urlImagen: string;            
     descripcion: string;
-    precio: number; 
-   // disponible?: boolean;      
+    precio: number;   
   }

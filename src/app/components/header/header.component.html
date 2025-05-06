@@ -3,48 +3,49 @@
 <header>
     <nav>
         <div class="navbar">
-            <p class="titulo" (click)="navigateTo('lista')" style="cursor: pointer;">Beauty Lu</p>
+            <p class="titulo"  (click)="home()" style="cursor: pointer;">Beauty Lu</p>
             <ul class="lista-principal">
                 <li class="cuidadoFacial">
-                    Cuidado facial
-                    <ul class="tipos-cuidado">
-                        <li >Hidratantes</li>
-                        <li >Limpiadores</li>
-                        <li >Mascarillas</li>
-                    </ul>
+                  Cuidado facial
+                  <ul class="tipos-cuidado">
+                    <li (click)="filterBy('cuidadoFacial','1')">Hidratantes</li>
+                    <li (click)="filterBy('cuidadoFacial','2')">Limpiadores</li>
+                    <li (click)="filterBy('cuidadoFacial','3')">Mascarillas</li>
+                  </ul>
                 </li>
                 <li class="pelo">
-                    Cabello
-                    <ul class="productos-pelo">
-                        <li>Champús</li>
-                        <li >Acondicionadores</li>
-                        <li >Mascarillas</li>
-                        <li >Aceites</li>
-                    </ul>
+                  Cabello
+                  <ul class="productos-pelo">
+                    <li (click)="filterBy('pelo','4')">Champús</li>
+                    <li (click)="filterBy('pelo','5')">Acondicionadores</li>
+                    <li (click)="filterBy('pelo','6')">Mascarillas</li>
+                  </ul>
                 </li>
-                <li class="peloRizado"> Cabello rizado
-                    <ul class="productos-peloRizado">
-                        <li>Champús</li>                                
-                        <li >Acondicionadores</li>
-                        <li >Mascarillas</li>
-                        <li >Activador de rizos</li>
-                    </ul>                         
+                <li class="peloRizado">
+                  Cabello rizado
+                  <ul class="productos-peloRizado">
+                    <li (click)="filterBy('peloRizado','7')">Champús</li>
+                    <li (click)="filterBy('peloRizado','8')">Acondicionadores</li>
+                    <li (click)="filterBy('peloRizado','9')">Mascarillas</li>
+                    <li (click)="filterBy('peloRizado','10')">Activador de rizos</li>
+                  </ul>
                 </li>
-            </ul>
+              </ul>
+              
             <ul class="lista-secundaria"></ul>
             <li class="cuenta">
                 <img src="https://cdn-icons-png.flaticon.com/512/3276/3276535.png" alt="Icono de la cuenta">
                 <ul class="propiedades-cuenta">
                     <li *ngIf="estaAutenticado" (click)="navigateTo('infoPers')">Información personal</li>
-                    <li *ngIf="estaAutenticado" (click) = "navigateTo('cestaComp')">Mi cesta</li>
+                    <li *ngIf="estaAutenticado" (click)="navigateTo('cestaComp')">Mi cesta</li>
                     <li (click)="navigateTo('login')">Iniciar Sesión</li>
                     <li (click)="navigateTo('crearCuenta')">Crear cuenta</li>
-                     <li *ngIf="estaAutenticado" (click)="cerrarSesion()">Cerrar sesión</li> 
+                    <li *ngIf="estaAutenticado" (click)="cerrarSesion()">Cerrar sesión</li>
                 </ul>
             </li>
             <div *ngIf="estaAutenticado">
                 <p>Hola, {{ nombreUsuario }}</p>
-            </div>               
+            </div>
         </div>
     </nav>
 </header>
