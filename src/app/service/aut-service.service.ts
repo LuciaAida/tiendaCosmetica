@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth'; // API modular
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut, User } from 'firebase/auth'; // API modular
 import { initializeApp } from 'firebase/app';
 import { environment } from '../../environments/environment'; // Asegúrate de que importes tu configuración de Firebase
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { doc, getDoc, setDoc, updateDoc } from '@angular/fire/firestore';
 import { Firestore, getFirestore } from 'firebase/firestore';
 import { UsuarioService } from './usuario.service';
@@ -17,12 +17,17 @@ export class AuthService {
   private nombreUsuario = new BehaviorSubject<string>('');
   private esAdmin = new BehaviorSubject<boolean>(false);
   usuarioService: UsuarioService;
+  private usuarioActual = new BehaviorSubject<User | null>(null);
 
   constructor() {
     initializeApp(environment.firebase);
     this.auth = getAuth();
     this.firestore = getFirestore();
     this.usuarioService = new UsuarioService(this.firestore);
+
+    this.auth.onAuthStateChanged(user => {
+      this.usuarioActual.next(user);
+    });
   }
 
   login(email: string, password: string) {
@@ -60,6 +65,10 @@ export class AuthService {
         soyAdmin: false
       })
     });
+  }
+
+  get currentUser$(): Observable<User | null> {
+    return this.usuarioActual.asObservable();
   }
 
   setAdmin(uid: string){

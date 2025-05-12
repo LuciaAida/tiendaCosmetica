@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { Firestore, doc, docData, getDoc, setDoc } from '@angular/fire/firestore';
 
 @Injectable({
@@ -54,5 +54,12 @@ export class UsuarioService {
     const ref = doc(this.firestore, `usuarios/${usuario_id}`);
     await setDoc(ref, { cesta: productos }, { merge: true });
     this.cestaSubject.next(productos);
+  }
+
+  getCesta(usuario_id: string): Observable<any[]> {
+    const ref = doc(this.firestore, `usuarios/${usuario_id}`);
+    return docData(ref).pipe(
+      map((data: any) => data.cesta || [])
+    );
   }
 }

@@ -76,6 +76,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  cursor:pointer;
   font-size: 1rem;
   border: none;
   cursor: pointer;
@@ -88,6 +89,7 @@
   color: #4A3B4C;
   margin: 20px;
   padding: 12px 24px;
+  cursor:pointer;
 }
 
 .btn-iniciar:hover {
@@ -98,6 +100,7 @@
 .btn-ver {
   background: #B1E5B1; /* verde pastel */
   color: #4A3B4C;
+  cursor:pointer;
   padding: 10px 20px;
 }
 
@@ -110,6 +113,7 @@
   color: #4A3B4C;
   padding: 8px 16px;
   margin-top: 16px;
+  cursor:pointer;
 }
 
 .btn-reiniciar:hover {

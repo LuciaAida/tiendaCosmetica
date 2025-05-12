@@ -25,7 +25,6 @@ subirProductoCompleto(productoData: any, archivo: File): Promise<void> {
         return getDownloadURL(fileRef);
       })
       .then(urlImagen => {
-        console.log('URL obtenida:', urlImagen);
         if (!urlImagen) throw new Error('No se pudo obtener la URL de la imagen');
         // combinar todos los datos del producto + URL de la imagen
         const productoCompleto = {

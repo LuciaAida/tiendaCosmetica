@@ -35,7 +35,6 @@ export class CrearCuentaComponent implements OnInit{
       correo: ['', [Validators.required, Validators.email]],
       contrasenia: ['', [Validators.required, Validators.minLength(6)]],
       confContrasenia: ['', [Validators.required, Validators.minLength(6)]],
-      condiciones: [false, Validators.requiredTrue],
       esAdmin:false
     },{
       validators: this.contraseniasNoCoinciden
@@ -67,8 +66,6 @@ export class CrearCuentaComponent implements OnInit{
       this.modalMensajeError = 'Correo electrónico no válido';
     } else if (this.form.hasError('contraseniasNoCoinciden')) {
       this.modalMensajeError = 'Las contraseñas no coinciden';
-    } else if(this.form.get('condiciones')?.hasError('required')){
-      this.modalMensajeError = 'Debe aceptar los términos y condiciones';
     }else {
       this.modalMensajeError = 'Por favor, completa todos los campos';
     }

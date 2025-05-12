@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ProductoService } from '../../../../service/producto.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { productoModelo } from '../modelo/producto.modelo';
+import { UsuarioService } from '../../../../service/usuario.service';
 
 @Component({
   selector: 'app-producto-detalle',
@@ -14,31 +15,39 @@ import { productoModelo } from '../modelo/producto.modelo';
   templateUrl: './producto-detalle.component.html',
   styleUrl: './producto-detalle.component.css'
 })
-export class ProductoDetalleComponent implements OnInit{
+export class ProductoDetalleComponent implements OnInit {
   esAdmin: boolean = false;
   producto!: productoModelo;
   formProducto!: FormGroup;
   isEditing: boolean = false;
+  uid!: string;
+  cesta: any[] = [];
   mostrarModal: boolean = false;
   modalMensaje: string = '¿Estás seguro de guardar los cambios?';
   estaAutenticado = false;
   modalMensajeCarrito = '';
-  modalTipo: 'confirmLogin' |'edicion' = 'confirmLogin';
+  modalTipo: 'confirmLogin' | 'edicion' = 'confirmLogin';
 
   constructor(
     private authService: AuthService,
     private productoService: ProductoService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private usuService: UsuarioService
   ) { }
 
   ngOnInit(): void {
+    this.uid = this.authService.getUsuarioId()!; 
+    this.usuService.cargarDatosUsuario(this.uid);
+    this.usuService.cesta$
+    .subscribe(items => this.cesta = items); 
+
     this.authService.esAdmin$.subscribe(isAdmin => {
       this.esAdmin = isAdmin;
     });
 
-    this.authService.estaAutenticado.subscribe(valor =>{
+    this.authService.estaAutenticado.subscribe(valor => {
       this.estaAutenticado = valor;
     })
 
@@ -64,40 +73,40 @@ export class ProductoDetalleComponent implements OnInit{
     this.isEditing = true;
   }
 
- // Cambiar el tipo de modal dependiendo de la acción
-enviar(): void {
-  if (this.isEditing) {
-    this.modalTipo = 'edicion';  // Mostrar el modal de confirmación de edición
-    this.mostrarModal = true;
-  }
-}
-
-cerrarModal(confirm = false): void {
-  this.mostrarModal = false;
-  
-  // Comportamiento según el tipo de modal
-  if (this.modalTipo === 'edicion' && confirm) {
-    if (this.producto && this.formProducto.valid) {
-      const datosActualizados = {
-        id: this.producto.id,
-        nombre: this.formProducto.value.nombre,
-        tipo: this.producto.tipo,          
-        subtipo: this.producto.subtipo,    
-        urlImagen: this.producto.urlImagen, 
-        descripcion: this.formProducto.value.descripcion,
-        precio: this.formProducto.value.precio
-      };
-
-      this.productoService.actualizarProducto(this.producto.id!, datosActualizados);
-      this.router.navigate(['/productos/lista']);
+  // Cambiar el tipo de modal dependiendo de la acción
+  enviar(): void {
+    if (this.isEditing) {
+      this.modalTipo = 'edicion';  // Mostrar el modal de confirmación de edición
+      this.mostrarModal = true;
     }
   }
-  
-  // Si el tipo de modal es confirmLogin
-  if (this.modalTipo === 'confirmLogin' && confirm) {
-    this.router.navigate(['/crearCuenta']); 
+
+  cerrarModal(confirm = false): void {
+    this.mostrarModal = false;
+
+    // Comportamiento según el tipo de modal
+    if (this.modalTipo === 'edicion' && confirm) {
+      if (this.producto && this.formProducto.valid) {
+        const datosActualizados = {
+          id: this.producto.id,
+          nombre: this.formProducto.value.nombre,
+          tipo: this.producto.tipo,
+          subtipo: this.producto.subtipo,
+          urlImagen: this.producto.urlImagen,
+          descripcion: this.formProducto.value.descripcion,
+          precio: this.formProducto.value.precio
+        };
+
+        this.productoService.actualizarProducto(this.producto.id!, datosActualizados);
+        this.router.navigate(['/productos/lista']);
+      }
+    }
+
+    // Si el tipo de modal es confirmLogin
+    if (this.modalTipo === 'confirmLogin' && confirm) {
+      this.router.navigate(['/crearCuenta']);
+    }
   }
-}
 
 
   cancelarEdicion(): void {
@@ -117,19 +126,20 @@ cerrarModal(confirm = false): void {
       return;
     }
 
-    let cesta: any[] = JSON.parse(localStorage.getItem('cesta') || '[]');
-  
-    const indice = cesta.findIndex(p => p.id === producto.id);
-    if (indice !== -1) {
-      cesta[indice].cantidad += 1;
-    } else {
-      cesta.push({ ...producto, cantidad: 1 });
-    }
-  
-    localStorage.setItem('cesta', JSON.stringify(cesta));
+    const idx = this.cesta.findIndex(p => p.id === producto.id);
+    if (idx !== -1){
+      this.cesta[idx].cantidad++;
+    } 
+    else{
+      this.cesta.push({ ...producto, cantidad: 1 });
+    } 
+    // this.usuService.guardarCesta(this.uid, this.cesta);
+    // this.router.navigate(['cestaComp']);
+    this.usuService.guardarCesta(this.uid, this.cesta);
+    localStorage.setItem('cesta', JSON.stringify(this.cesta)); // Sincroniza localStorage
     this.router.navigate(['cestaComp']);
   }
-  
+
 
   navigateTo(route: string) {
     this.router.navigate([route]);
