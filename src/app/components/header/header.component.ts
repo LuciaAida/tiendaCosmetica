@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from '../../service/aut-service.service';
 import { Subscription } from 'rxjs';
 import { FiltroService } from '../../service/filtro.service';
+import { Router } from '@angular/router';
 
 
 @Component({

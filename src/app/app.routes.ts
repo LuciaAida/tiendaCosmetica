@@ -13,10 +13,9 @@ export const routes: Routes = [
   { path: 'lista', component: ListaProductosComponent },
   { path: 'crearCuenta', component: CrearCuentaComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'detalle', component: ProductoDetalleComponent },
-  {path: 'detalle/:id',
-    loadComponent: () => import('./components/main/producto/producto-detalle/producto-detalle.component').then(m => m.ProductoDetalleComponent)
-  },  
+  { path: 'detalle/:id',
+     loadComponent: () => import('./components/main/producto/producto-detalle/producto-detalle.component').then(m => m.ProductoDetalleComponent)
+  }, 
   { path: 'formCont', component: FormContactoComponent },
   { path: 'cestaComp', component: CestaCompraComponent },
   { path: 'infoPers', component: InfoPersonalComponent },

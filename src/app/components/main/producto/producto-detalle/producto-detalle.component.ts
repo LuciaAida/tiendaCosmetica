@@ -4,9 +4,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../../../service/aut-service.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ProductoService } from '../../../../service/producto.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { productoModelo } from '../modelo/producto.modelo';
 import { UsuarioService } from '../../../../service/usuario.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-producto-detalle',

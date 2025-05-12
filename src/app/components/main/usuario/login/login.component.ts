@@ -3,9 +3,9 @@ import { usuarioModelo } from '../modelo/usuario.model';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../../service/aut-service.service';
-import { Router } from '@angular/router';
 import { Firestore } from '@angular/fire/firestore';
 import { UsuarioService } from '../../../../service/usuario.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -76,9 +76,6 @@ export class LoginComponent {
     }
   }
 
-  // estaAutenticado():boolean{
-  //   return localStorage.getItem('usuario') != null; //true -> si esta activa
-  // }
 
   navigateTo(route:string){
     this.router.navigate([route]);

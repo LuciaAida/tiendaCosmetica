@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { UsuarioService } from '../../../../service/usuario.service';
 import { AuthService } from '../../../../service/aut-service.service';
 import { CommonModule, CurrencyPipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cesta-compra',
