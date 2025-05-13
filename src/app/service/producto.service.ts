@@ -3,7 +3,7 @@ import { addDoc, collectionData, deleteDoc, doc, docData, Firestore, updateDoc }
 import { Storage, ref, getDownloadURL, uploadBytes } from '@angular/fire/storage';
 import { collection } from 'firebase/firestore';
 import { productoModelo } from '../components/main/producto/modelo/producto.modelo';
-import { Observable } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +38,12 @@ subirProductoCompleto(productoData: any, archivo: File): Promise<void> {
         console.error('Error en el servicio:', error);
         throw error; // Propagar el error al componente
       });
+  }
+  
+   async obtenerIds(): Promise<string[]> {
+    const productos$ = this.getProductos(); // Observable<productoModelo[]>
+    const productos = await lastValueFrom(productos$); // espera al último valor :contentReference[oaicite:3]{index=3}
+    return productos.map(p => p.id!);          // mapea solo los IDs :contentReference[oaicite:4]{index=4}
   }
 
   getProductos(): Observable<productoModelo[]> {
