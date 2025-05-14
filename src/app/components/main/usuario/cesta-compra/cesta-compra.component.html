@@ -11,7 +11,7 @@
     
     <div class="info-producto">
       <h3>{{ item.nombre }}</h3>
-      <p>Precio: {{ item.precio | currency }}</p>
+      <p>Precio: {{ item.precio | number:'1.2-2' }}€</p>
 
       <div class="cantidad-control">
         <button (click)="restarCantidad(item)">-</button>
@@ -19,7 +19,7 @@
         <button (click)="sumarCantidad(item)">+</button>
       </div>
 
-      <p class="total-producto">Total: {{ item.precio * item.cantidad | currency }}</p>
+      <p class="total-producto">Total:{{ (item.precio * item.cantidad) | number:'1.2-2' }}€</p>
     </div>
 
     <button class="eliminar-boton" (click)="eliminarProducto(item)">
@@ -28,7 +28,7 @@
   </div>
 
   <div class="total-general" *ngIf="cesta.length > 0">
-    <h2>Total de la compra: {{ calcularTotal() | currency }}</h2>
+    <h2>Total de la compra: {{ calcularTotal() | number:'1.2-2' }}€</h2>
   </div>
 
   <div class="acciones-cesta">
