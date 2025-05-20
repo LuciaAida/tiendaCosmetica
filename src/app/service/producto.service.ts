@@ -36,14 +36,14 @@ subirProductoCompleto(productoData: any, archivo: File): Promise<void> {
         
       }).catch(error => {
         console.error('Error en el servicio:', error);
-        throw error; // Propagar el error al componente
+        throw error; // propagar el error al componente
       });
   }
   
    async obtenerIds(): Promise<string[]> {
-    const productos$ = this.getProductos(); // Observable<productoModelo[]>
-    const productos = await lastValueFrom(productos$); // espera al último valor :contentReference[oaicite:3]{index=3}
-    return productos.map(p => p.id!);          // mapea solo los IDs :contentReference[oaicite:4]{index=4}
+    const productos$ = this.getProductos(); 
+    const productos = await lastValueFrom(productos$); // espera al último valor
+    return productos.map(p => p.id!);          // mapea solo los IDs
   }
 
   getProductos(): Observable<productoModelo[]> {
@@ -54,7 +54,7 @@ subirProductoCompleto(productoData: any, archivo: File): Promise<void> {
   guardarProducto(producto: any): Promise<void> {
     const productosRef = collection(this.firestore, 'productos');
     
-    return addDoc(productosRef, producto) // <- Retornar la promesa directamente
+    return addDoc(productosRef, producto) // retorna la promesa 
     .then(() => {})
     .catch(error => { throw error; });
   }

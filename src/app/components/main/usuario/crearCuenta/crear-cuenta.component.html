@@ -11,13 +11,24 @@
       <input id="correo" #usuarioCorreo placeholder="Correo" type="email"  [(ngModel)] = "registroUsu.correo" formControlName="correo"/>
 
       <label for="usuarioContrasenia">Contraseña:</label>
-      <input id="contrasenia" #usuarioContrasenia placeholder="Contraseña" [(ngModel)] = "registroUsu.contrasenia" type="password" formControlName="contrasenia"/>
+        <div class="contenedor-password">
+          <input id="contrasenia" #usuarioContrasenia placeholder="Contraseña" [(ngModel)]="registroUsu.contrasenia" [type]="mostrarContrasenia ? 'text' : 'password'" formControlName="contrasenia"/>
+          <button type="button" class="icono-ojito" (click)="mostrarContrasenia = !mostrarContrasenia" aria-label="Mostrar u ocultar contraseña">
+            <i [class]="mostrarContrasenia ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'"></i>
+          </button>
+        </div>
   
       <label for="usuarioContrasenia2">Confirmar contraseña:</label>
-      <input id="contrasenia2" #usuarioContrasenia placeholder="Confirmar contraseña"  type="password" formControlName="confContrasenia"/>
+       <div class="contenedor-password">
+          <input id="contrasenia2" #usuarioContrasenia2 placeholder="Confirmar contraseña" [type]="mostrarContraseniaConfirmacion ? 'text' : 'password'" formControlName="confContrasenia"/>
+          <button type="button" class="icono-ojito" (click)="mostrarContraseniaConfirmacion = !mostrarContraseniaConfirmacion" aria-label="Mostrar u ocultar contraseña">
+            <i [class]="mostrarContraseniaConfirmacion ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'"></i>
+          </button>
+        </div>
 
       <button class="enviar" type="submit" >Crear cuenta</button> 
     </div> <!-- Este es el cierre de "formulario-usuario" -->
+
   </form>
   <div class="login">
     <p>¿Ya tienes una cuenta en <strong>BeautyLu</strong>?</p>

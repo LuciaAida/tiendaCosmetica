@@ -73,10 +73,10 @@ export class ProductoDetalleComponent implements OnInit {
     this.isEditing = true;
   }
 
-  // Cambiar el tipo de modal dependiendo de la acción
+  // cambia tipo modal
   enviar(): void {
     if (this.isEditing) {
-      this.modalTipo = 'edicion';  // Mostrar el modal de confirmación de edición
+      this.modalTipo = 'edicion';  
       this.mostrarModal = true;
     }
   }
@@ -84,7 +84,6 @@ export class ProductoDetalleComponent implements OnInit {
   cerrarModal(confirm = false): void {
     this.mostrarModal = false;
 
-    // Comportamiento según el tipo de modal
     if (this.modalTipo === 'edicion' && confirm) {
       if (this.producto && this.formProducto.valid) {
         const datosActualizados = {
@@ -102,7 +101,6 @@ export class ProductoDetalleComponent implements OnInit {
       }
     }
 
-    // Si el tipo de modal es confirmLogin
     if (this.modalTipo === 'confirmLogin' && confirm) {
       this.router.navigate(['/crearCuenta']);
     }
@@ -133,10 +131,8 @@ export class ProductoDetalleComponent implements OnInit {
     else{
       this.cesta.push({ ...producto, cantidad: 1 });
     } 
-    // this.usuService.guardarCesta(this.uid, this.cesta);
-    // this.router.navigate(['cestaComp']);
     this.usuService.guardarCesta(this.uid, this.cesta);
-    localStorage.setItem('cesta', JSON.stringify(this.cesta)); // Sincroniza localStorage
+    localStorage.setItem('cesta', JSON.stringify(this.cesta)); // sincroniza localStorage
     this.router.navigate(['cestaComp']);
   }
 

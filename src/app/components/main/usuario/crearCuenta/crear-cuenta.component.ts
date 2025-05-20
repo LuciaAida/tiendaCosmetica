@@ -12,11 +12,13 @@ import { Router } from '@angular/router';
   templateUrl: './crear-cuenta.component.html',
   styleUrl: './crear-cuenta.component.css'
 })
-export class CrearCuentaComponent implements OnInit{
+export class CrearCuentaComponent implements OnInit {
   registroUsu = {
     correo: '',
     contrasenia: ''
   }
+  mostrarContrasenia: boolean = false;
+  mostrarContraseniaConfirmacion: boolean = false;
   mostrarModal: boolean = false;
   mostrarModalError: boolean = false;
   modalMensaje: string = '';
@@ -27,7 +29,7 @@ export class CrearCuentaComponent implements OnInit{
     private formBuilder: FormBuilder,
     private auService: AuthService,
     private router: Router
-  ){}
+  ) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -35,30 +37,31 @@ export class CrearCuentaComponent implements OnInit{
       correo: ['', [Validators.required, Validators.email]],
       contrasenia: ['', [Validators.required, Validators.minLength(6)]],
       confContrasenia: ['', [Validators.required, Validators.minLength(6)]],
-      esAdmin:false
-    },{
+      esAdmin: false
+    }, {
       validators: this.contraseniasNoCoinciden
     });
   }
 
-  registro(){
-    const {correo, contrasenia, nombre } = this.form.value;
+
+  registro() {
+    const { correo, contrasenia, nombre } = this.form.value;
     this.auService.register(correo, contrasenia, nombre).then(() => {
       this.modalMensaje = 'Registro correcto';
-        this.mostrarModal = true;
-        this.form.reset();
+      this.mostrarModal = true;
+      this.form.reset();
     })
-    .catch((error) => {
-      this.modalMensajeError = 'Registro incorrecto';
+      .catch((error) => {
+        this.modalMensajeError = 'Registro incorrecto';
         this.mostrarModalError = true;
         this.form.reset();
-    });
+      });
   }
 
   enviar(): any {
     if (this.form.get('contrasenia')?.hasError('minlength')) {
       this.modalMensajeError = 'La contraseña debe tener al menos 6 caracteres';
-    }else if (this.form.get('confContrasenia')?.hasError('minlength')) {
+    } else if (this.form.get('confContrasenia')?.hasError('minlength')) {
       this.modalMensajeError = 'La confirmación de contraseña debe tener al menos 6 caracteres';
     } else if (this.form.get('correo')?.hasError('required')) {
       this.modalMensajeError = 'Por favor, ingrese su correo electrónico';
@@ -66,10 +69,10 @@ export class CrearCuentaComponent implements OnInit{
       this.modalMensajeError = 'Correo electrónico no válido';
     } else if (this.form.hasError('contraseniasNoCoinciden')) {
       this.modalMensajeError = 'Las contraseñas no coinciden';
-    }else {
+    } else {
       this.modalMensajeError = 'Por favor, completa todos los campos';
     }
-  
+
     if (this.form.invalid) {
       this.mostrarModalError = true;
     } else {
@@ -77,27 +80,27 @@ export class CrearCuentaComponent implements OnInit{
     }
   }
 
-  contraseniasNoCoinciden(FormGroup : FormGroup):ValidationErrors | null{
+  contraseniasNoCoinciden(FormGroup: FormGroup): ValidationErrors | null {
     const contrasenia = FormGroup.get('contrasenia')?.value;
     const confContrasenia = FormGroup.get('confContrasenia')?.value;
-    if(contrasenia != confContrasenia){
+    if (contrasenia != confContrasenia) {
       return { contraseniasNoCoinciden: true };
     }
     return null; //si coinciden, no hay error
   }
-  
 
-  navigateTo(route:string){
+
+  navigateTo(route: string) {
     this.router.navigate([route]);
   }
 
-  cerrarModal(){
+  cerrarModal() {
     this.mostrarModal = false;
     this.mostrarModalError = false;
   }
 
 
-  addUsuario(){
+  addUsuario() {
     const usuario: usuarioModelo = {
       usuario_id: 0,
       nombre: this.form.value.nombre,
@@ -106,6 +109,6 @@ export class CrearCuentaComponent implements OnInit{
       confContrasenia: this.form.value.confContrasenia,
       esAdmin: false
     };
-  
+
   }
 }

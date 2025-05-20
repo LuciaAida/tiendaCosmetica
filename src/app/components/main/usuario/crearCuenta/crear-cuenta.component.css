@@ -135,3 +135,38 @@ body {
   top: 0;
   left: 0;
 }
+/**-----------------------------OJITO--------------------------------*/
+/* Contenedores para inputs con icono */
+.contenedor-password {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.contenedor-password input {
+  padding-right: 40px; /* Espacio para el icono */
+}
+
+/* Icono del ojo (reutiliza los mismos estilos del login) */
+.icono-ojito {
+  position: absolute;
+  right: 10px;
+  top: 35%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #9E6F72;
+  padding: 0;
+  font-size: 1.1em;
+  transition: all 0.3s ease;
+}
+
+.icono-ojito:hover {
+  color: #80424D;
+  font-size: 1.2em;
+}
+
+.icono-ojito:focus {
+  outline: none;
+}

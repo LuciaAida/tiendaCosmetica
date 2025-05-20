@@ -57,16 +57,14 @@ export class ListaProductosComponent implements OnInit{
   }
 
   acortarDescripcion(description: string, esImagenGrande: boolean, limitPequeno: number = 15, limitGrande: number = 50, minimoLineas: number = 2): string {
-    // Determina el límite de caracteres basado en si la imagen es grande o pequeña
+    // determina el limite de carasteres 
     const limit = esImagenGrande ? limitPequeno : limitGrande; 
     
-    // Calcula la longitud mínima en base al número de líneas que quieres
-    const longitudMinima = minimoLineas * 30;  // 30 caracteres como un estimado por línea
+    // calculo longitud mínima en base al numero de lineas(30 defecto)
+    const longitudMinima = minimoLineas * 30;
 
-    // Usa el límite más grande entre el límite calculado y el mínimo requerido
+    // limite más grande entre el calculado y el minimo
     const limiteFinal = Math.max(limit, longitudMinima);
-
-    // Devuelve la descripción cortada si es necesario, añadiendo '...' al final
     return description.length > limiteFinal ? description.substring(0, limiteFinal) + '...' : description;
 }
   

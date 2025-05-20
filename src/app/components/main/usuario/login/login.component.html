@@ -6,11 +6,16 @@
       <label for="usuarioCorreo">Correo:</label>
       <input id="usuarioCorreo" #usuarioCorreo placeholder="Correo" type="email" formControlName="correo"/>
 
-      <label for="usuarioContrasenia">Contraseña:</label>
-      <input id="usuarioContrasenia" #usuarioContrasenia placeholder="Contraseña" type="password" formControlName="contrasenia"/>
-  
-      <button class="enviar" type="submit">Iniciar sesión</button> 
-    </div> 
+       <label for="usuarioContrasenia">Contraseña:</label>
+          <div class="contenedor-password">
+            <input id="usuarioContrasenia" placeholder="Contraseña" [type]="mostrarContrasenia ? 'text' : 'password'" formControlName="contrasenia"/>
+            <button type="button" class="icono-ojito" (click)="accionMostrarContrasenia()" aria-label="Mostrar u ocultar contraseña">
+              <i [class]="mostrarContrasenia ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'"></i>
+            </button>
+          </div>
+
+      <button class="enviar" type="submit">Iniciar sesión</button>
+    </div>
    
   </form>
 </div> 

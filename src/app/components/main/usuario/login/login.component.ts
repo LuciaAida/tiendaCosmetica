@@ -17,29 +17,27 @@ import { Router } from '@angular/router';
 
 
 export class LoginComponent {
- public form!: FormGroup;
- esAdmin: boolean = false;
- mostrarModal: boolean = false;
- mostrarModalError: boolean = false;
- modalMensaje: string = '';
- modalMensajeError: string = '';
- correo: string ="";
- contrasenia: string="";
- user: any = null;
+  public form!: FormGroup;
+  esAdmin: boolean = false;
+  mostrarModal: boolean = false;
+  mostrarModalError: boolean = false;
+  modalMensaje: string = '';
+  modalMensajeError: string = '';
+  correo: string = "";
+  mostrarContrasenia: boolean = false;
+  contrasenia: string = "";
+  user: any = null;
 
   constructor(
-    private autenService:AuthService,
+    private autenService: AuthService,
     private formBuilder: FormBuilder,
     private router: Router,
     private firestore: Firestore,
     private usuarioService: UsuarioService
-  ){
+  ) {
   }
 
   ngOnInit(): void {
-    // this.autenService.esAdmin$.subscribe(esAdmin => {
-    //   this.esAdmin = esAdmin;
-    // });
     this.form = this.formBuilder.group({
       correo: ['', [Validators.required, Validators.email]],
       contrasenia: ['', [Validators.required, Validators.minLength(6)]]
@@ -48,18 +46,18 @@ export class LoginComponent {
 
 
   login() {
-    const {correo, contrasenia } = this.form.value;
-    this.autenService.login(correo,contrasenia)
+    const { correo, contrasenia } = this.form.value;
+    this.autenService.login(correo, contrasenia)
       .then(() => {
         this.modalMensaje = 'Inicio de sesión correcto';
         this.mostrarModal = true;
         this.form.reset();
-    })
+      })
       .catch((error) => {
         this.modalMensajeError = 'Correo o contraseña incorrectos';
         this.mostrarModalError = true;
         this.form.reset();
-    });
+      });
   }
 
 
@@ -68,26 +66,30 @@ export class LoginComponent {
     if (this.form.get('contrasenia')?.hasError('minlength')) {
       this.modalMensajeError = 'La contraseña debe tener al menos 6 caracteres';
       this.mostrarModalError = true;
-    } else if(this.form.invalid){
+    } else if (this.form.invalid) {
       this.modalMensajeError = 'Por favor, completa todos los campos';
       this.mostrarModalError = true;
-    }else{
+    } else {
       this.login();
     }
   }
 
 
-  navigateTo(route:string){
+  navigateTo(route: string) {
     this.router.navigate([route]);
   }
 
-  cerrarModal(){
+  accionMostrarContrasenia() {
+    this.mostrarContrasenia = !this.mostrarContrasenia;
+  }
+
+  cerrarModal() {
     this.mostrarModal = false;
     this.mostrarModalError = false;
   }
 
-  
-  addUsuario(){
+
+  addUsuario() {
     const usuario: usuarioModelo = {
       usuario_id: 0,
       nombre: this.form.value.nombre,

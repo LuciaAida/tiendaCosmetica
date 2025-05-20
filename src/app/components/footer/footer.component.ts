@@ -18,11 +18,5 @@ export class FooterComponent implements OnInit{
     this.router.navigate([route]);
   }
 
-  enviarCorreo(): void {
-    const email = 'luperezaida@gmail.com';
-    const subject = encodeURIComponent('Contacto desde mi sitio');
-    const body = encodeURIComponent('¡Hola Lucia!\n\nMe gustaría ponerme en contacto sobre...');
-    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
-  }
 
 }

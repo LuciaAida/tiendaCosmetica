@@ -23,10 +23,6 @@ export class CestaCompraComponent implements OnInit {
     private router: Router
   ) { }
 
-  // ngOnInit() {
-  //   const datos = localStorage.getItem('cesta');
-  //   this.cesta = datos ? JSON.parse(datos) : [];
-  // }
   ngOnInit() {
     this.authService.currentUser$.subscribe(user => {
       if (user) {
@@ -35,7 +31,7 @@ export class CestaCompraComponent implements OnInit {
         // Obtener cesta desde Firestore
         this.usuarioService.getCesta(this.uid).subscribe(cesta => {
           this.cesta = cesta;
-          localStorage.setItem('cesta', JSON.stringify(cesta)); // Opcional: sincronizar localStorage
+          localStorage.setItem('cesta', JSON.stringify(cesta)); 
         });
       }
     });

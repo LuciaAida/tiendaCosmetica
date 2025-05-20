@@ -75,15 +75,15 @@ export class AuthService {
     getDoc(doc(this.firestore,'usuarios',uid)).then((docSnap) =>{
       if (docSnap.exists()) {
         const data = docSnap.data();
-        this.esAdmin.next(data?.['soyAdmin'] || false);  // Establecemos si el usuario es admin
+        this.esAdmin.next(data?.['soyAdmin'] || false);  // establece si el usuario es admin
       }
     });
   }
 
 
   getUsuarioId(): string | null {
-    const user = this.auth.currentUser; // Obtenemos el usuario actual
-    return user ? user.uid : null; // Si hay un usuario autenticado, devolvemos su UID
+    const user = this.auth.currentUser; // obtiene el usuario actual
+    return user ? user.uid : null; // si hay un usuario autenticado, devolvemos su UID
   }
 
    get estaAutenticado(){
