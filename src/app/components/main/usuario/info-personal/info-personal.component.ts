@@ -19,14 +19,15 @@ export class InfoPersonalComponent {
     seca: 'Tu piel necesita más hidratación y protección contra la pérdida de agua.',
     grasa: 'Tu piel produce más sebo de lo normal, necesita regulación.',
     mixta: 'Tienes zonas más grasas (generalmente frente y nariz) y otras más secas.',
-    sensible: 'Tu piel reacciona fácilmente a factores externos o productos.'
+    sensible: 'Tu piel reacciona fácilmente a factores externos o productos.',
+    nota: 'Recuerda que ante cualquier duda, es recomendable consultar con un especialista.'
   };
   preguntasPiel = [
     { texto: '¿Cómo sientes tu piel después de lavarla?', opciones: ['Tensa', 'Grasa', 'Normal', 'Sensible'] },
     { texto: '¿Con qué frecuencia ves brillos?', opciones: ['Siempre', 'A veces', 'Nunca', 'Solo en zonas específicas'] },
     { texto: '¿Tu piel se descama o enrojece con facilidad?', opciones: ['Sí', 'No'] },
     { texto: '¿Qué textura tiene tu piel al tacto?', opciones: ['Suave', 'Gruesa', 'Irregular'] },
-    { texto: '¿Tienes zonas con acné o espinillas?', opciones: ['Sí', 'No'] },
+    { texto: '¿Tienes zonas con acné o espinillas?', opciones: ['Sí', 'No'] }
   ];
   respuestasPiel: string[] = Array(this.preguntasPiel.length).fill('');
   tipoDetectadoPiel: string | null = null;
@@ -38,6 +39,7 @@ export class InfoPersonalComponent {
     seco: 'Se ve opaco y se siente áspero. Le falta hidratación.',
     normal: 'Se mantiene limpio y suave por varios días. No necesita muchos cuidados.',
     mixto: 'Raíz grasa y puntas secas. Requiere productos equilibrados.',
+    notaPelo: 'Recuerda que ante cualquier duda, es recomendable consultar con un especialista.'
   };
   preguntasPelo = [
     { texto: '¿Con qué frecuencia sientes que tu cabello se ve grasoso o sucio?', opciones: ['A las pocas horas de lavarlo', 'Al día siguiente de lavarlo', 'Después de 2 o más días', 'Raramente, casi nunca'] },
